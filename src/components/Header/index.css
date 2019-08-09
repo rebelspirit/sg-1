@@ -1,0 +1,172 @@
+header {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    max-height: 60px;
+    background: rgba(36, 36, 36, 0.95);
+    padding: 0 15px;
+    z-index: 15;
+}
+.navigation-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 155px;
+}
+.navigation-container:last-child {
+    justify-content: space-around;
+}
+.burger {
+    display: flex;
+    align-items: center;
+    max-width: 35px;
+    height: 24px;
+    padding: 5px;
+    cursor: pointer;
+}
+.burger button {
+    position: relative;
+    background: #ffffff;
+    height: 2px;
+    width: 23px;
+    padding: 0;
+    border: none;
+    -webkit-transition: .3s;
+    -moz-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+    outline: none !important;
+}
+.burger button:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: -6px;
+    width: 23px;
+    height: 2px;
+    background: #ffffff;
+    -webkit-transform-origin: 1.5px center;
+    -moz-transform-origin: 1.5px center;
+    -o-transform-origin: 1.5px center;
+    transform-origin: 1.5px center;
+    -webkit-transition: .3s;
+    -moz-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+}
+.burger button:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 23px;
+    height: 2px;
+    background: #ffffff;
+    -webkit-transform-origin: 1.5px center;
+    -moz-transform-origin: 1.5px center;
+    -o-transform-origin: 1.5px center;
+    transform-origin: 1.5px center;
+    -webkit-transition: .3s;
+    -moz-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+}
+.burger.open button {
+    background: 0 0;
+}
+.burger.open button:before {
+    top: 0;
+    -webkit-transform: rotate3d(0,0,1,-45deg);
+    -moz-transform: rotate3d(0,0,1,-45deg);
+    -o-transform: rotate3d(0,0,1,-45deg);
+    transform: rotate3d(0,0,1,-45deg);
+    -webkit-transform-origin: 50% 50%;
+    -moz-transform-origin: 50% 50%;
+    -o-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+}
+.burger.open button:after {
+    bottom: 0;
+    -webkit-transform: rotate3d(0,0,1,45deg);
+    -moz-transform: rotate3d(0,0,1,45deg);
+    -o-transform: rotate3d(0,0,1,45deg);
+    transform: rotate3d(0,0,1,45deg);
+    transform-origin: 50% 50%;
+    -webkit-transform-origin: 50% 50%;
+    -moz-transform-origin: 50% 50%;
+    -o-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+}
+.logo {
+    font-family: 'SF UI Display Semibold', sans-serif;
+    color: #fff;
+    font-size: 1.3rem;
+    cursor: pointer;
+    user-select: none;
+    padding: 0 5px;
+}
+.logo svg {
+    margin-right: 5px;
+}
+.search-container {
+    width: 100%;
+    max-width: 550px;
+    margin: 0 auto;
+}
+.search-container form {
+    display: flex;
+    border: 1px solid #343434;
+    border-radius: 3px;
+    -webkit-transition: .3s;
+    -moz-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+}
+.search-container form:focus-within {
+    border: 1px solid rgba(252, 98, 98, .65);
+}
+.search-container form input {
+    width: 100%;
+    color: #B0B0B0;
+    background-color: rgba(37, 37, 37, 0.45);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    border: none;
+    outline: none;
+    line-height: 20px;
+    padding: 5px 10px;
+}
+.search-container form button {
+    background-color: rgba(37, 37, 37, 0.45);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    border: none;
+    color: #B0B0B0;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.movie-container,
+.notification-container,
+.signIn-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: #ffffff;
+    cursor: pointer;
+    padding: 10px 11px;
+    border-radius: 50%;
+    -webkit-transition: .3s;
+    -moz-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+}
+.notification-container {
+    padding: 10px 12px;
+}
+.movie-container:hover,
+.notification-container:hover,
+.signIn-container:hover {
+    background: rgba(176, 176, 176, .2);
+}

@@ -1,0 +1,176 @@
+import React, {Component} from 'react';
+import './index.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import InfiniteScroll from 'react-infinite-scroller';
+import {connect} from "react-redux";
+import {NavLink} from "react-router-dom";
+import Loader from "../Loader";
+import {bindActionCreators} from "redux";
+import {getSerialsFromApi, loadMoreSerials} from "../../actions";
+
+class Serials extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            page: 1,
+            isOpenCategory: false,
+            currentCategory: "",
+            openWidth: {
+                paddingLeft: "240px"
+            },
+            closedWidth: {
+                paddingLeft: "60px"
+            },
+            serialsNavigation: {
+                firstColumn: {
+                    adventure: {
+                        name: "Приключения",
+                        id: "10759"
+                    },
+                    cartoons: {
+                        name: "Мультфильм",
+                        id: "16"
+                    },
+                    comedy: {
+                        name: "Комедия",
+                        id: "35"
+                    },
+                },
+                secondColumn: {
+                    crime: {
+                        name: "Криминал",
+                        id: "80"
+                    },
+                    documentary: {
+                        name: "Документальный",
+                        id: "99"
+                    },
+                    drama: {
+                        name: "Драма",
+                        id: "18"
+                    },
+                },
+                thirdColumn: {
+                    family: {
+                        name: "Семейный",
+                        id: "10751"
+                    },
+                    childly: {
+                        name: "Детский",
+                        id: "10762"
+                    },
+                    detective: {
+                        name: "Детектив",
+                        id: "9648"
+                    },
+                },
+                fourthColumn: {
+                    news: {
+                        name: "Новости",
+                        id: "10763"
+                    },
+                    twshow: {
+                        name: "Реалити-шоу",
+                        id: "10764"
+                    },
+                    fantasy: {
+                        name: "Фэнтези",
+                        id: "10765"
+                    },
+                },
+                fivesColumn: {
+                    opera: {
+                        name: "Опера",
+                        id: "10766"
+                    },
+                    war: {
+                        name: "Война",
+                        id: "10768"
+                    },
+                    western: {
+                        name: "Вестерн",
+                        id: "37"
+                    },
+                }
+            }
+        };
+    };
+    componentDidMount() {
+        window.scrollTo(0, 0)
+    }
+
+    setCategory = (id) => {
+        this.setState({
+            currentCategory: id,
+            page: 1,
+        }, () => this.props.getSerialsFromApi(1, this.state.currentCategory));
+    };
+
+    openCategory = () => {
+        this.setState({isOpenCategory: !this.state.isOpenCategory})
+    };
+
+    render() {
+        return (
+            <main style={this.props.isToggleBurger ? this.state.openWidth : this.state.closedWidth}>
+                <div className={'main-container'}>
+                    <div className={'row'}>
+                        <h2 className={'movie-type pink'} onClick={this.openCategory}>
+                            <div className="nav-icon">
+                                <FontAwesomeIcon icon={"pizza-slice"} />
+                            </div>
+                            Сериалы
+                            <div className={this.state.isOpenCategory ? 'arrow-right arrow-right-rotate' : 'arrow-right'}>
+                                <FontAwesomeIcon icon={"chevron-down"} />
+                            </div>
+                        </h2>
+                        <div className={this.state.isOpenCategory ? 'category category-open' : 'category'}>
+                            {Object.values(this.state.serialsNavigation).map((col, key) =>
+                                <div className={"category-container pink"} key={key}>
+                                    {Object.values(col).map((submenu, key) =>
+                                        <p key={key} onClick={() => this.setCategory(submenu.id)}>{submenu.name}</p>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                        <InfiniteScroll
+                            pageStart={this.state.page}
+                            loadMore={() => {
+                                this.setState((prevState) => {
+                                    page: prevState.page++
+                                }, () => this.props.loadMoreSerials(this.state.page, this.state.currentCategory))
+                            }}
+                            hasMore={true}
+                            loader={<Loader key={0}/>}
+                            useWindow={true}
+                            threshold={500}
+                        >
+                        <div className={'movies'}>
+                            {Object.values(this.props.serials).map((serial, key) =>
+                                <div key={key} className={'movies-item'}>
+                                    <NavLink to={`/serial/details/${serial.id}`}>
+                                        <img src={`https://image.tmdb.org/t/p/w1280${serial.poster_path}`} alt="poster"/>
+                                        <h6>{serial.name}</h6>
+                                    </NavLink>
+                                    <p>{serial.origin_country}, {serial.first_air_date.slice(0, 4)}</p>
+                                </div>
+                            )}
+                        </div>
+                        </InfiniteScroll>
+                    </div>
+                </div>
+            </main>
+        )};
+}
+
+const mapStateToProps = (state, props) => ({
+    isToggleBurger: state.isToggleBurger,
+    serials: state.serials,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    getSerialsFromApi: bindActionCreators(getSerialsFromApi, dispatch),
+    loadMoreSerials: bindActionCreators(loadMoreSerials, dispatch),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Serials);

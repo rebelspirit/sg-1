@@ -1,0 +1,271 @@
+main {
+    width: 100%;
+    padding-top: 60px;
+}
+.main-container {
+    padding-top: 30px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.main-container .row {
+    margin-bottom: 25px;
+}
+.movie-type {
+    font-family: 'SF UI Display Regular', sans-serif;
+    display: inline-block;
+    padding: 10px 5px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    font-size: 1.3rem;
+    font-weight: inherit !important;
+    text-decoration: none;
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+}
+.category {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1180px;
+    max-height: 0;
+    background: rgba(0, 0, 0, .75);
+    border-radius: .25rem;
+    margin: 0 auto;
+    box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+    -webkit-transition: max-height 500ms ease;
+    -moz-transition: max-height 500ms ease;
+    -o-transition: max-height 500ms ease;
+    transition: max-height 500ms ease;
+}
+.category-open {
+    max-height: 200px;
+}
+.category-container {
+    padding: 15px;
+}
+.category-container p {
+    font-family: 'SF UI Display Light', sans-serif;
+    padding: 3px;
+    cursor: pointer;
+    text-decoration: none !important;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+.category-container p:hover {
+    color: #ffffff;
+}
+.movies {
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px 0;
+    flex-wrap: wrap;
+}
+.movies-item {
+    max-width: 190px;
+    padding: 5px;
+    margin: 0 5px 15px 5px;
+}
+.movies-item a {
+    text-decoration: none !important;
+}
+.movies-item img {
+    display: block;
+    width: 180px;
+    height: 291px;
+    box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.7);
+    border-radius: .25rem !important;
+    -webkit-transition: .3s;
+    -moz-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+    cursor: pointer;
+}
+.movies-item img:hover {
+    transform: scale(1.03);
+    filter: brightness(110%);
+}
+.movies-item h6 {
+    color: #ffffff;
+    font-family: "SF UI Text Semibold", sans-serif;
+    font-size: .9rem;
+    padding: 7px 0;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.movies-item p {
+    color: #B0B0B0;
+    font-family: "SF UI Text Light", sans-serif;
+    font-size: .7rem;
+    padding: 3px 0;
+}
+.nav-icon {
+    display: inline-block;
+    min-width: 20px;
+    padding: 0 10px 0 0;
+}
+.arrow-right {
+    display: inline-block;
+    min-width: 20px;
+    padding: 0 15px;
+    font-size: 1rem;
+    color: #ffffff;
+    transition: all 0.4s ease;
+}
+.arrow-right-rotate {
+    transform: rotate(180deg);
+    padding: 1px 15px 0 15px;
+}
+.yellow {
+    color: #ffd86f;
+}
+.pink {
+    color: #fc6262;
+}
+.green {
+    color: #51fdba;
+}
+.blue {
+    color: #61dafb;
+}
+.details-background {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    background-position: center center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    background-size: cover;
+    z-index: -1;
+    opacity: .15;
+    box-shadow: inset 0 -10px 10px #141414;
+}
+
+.details-title {
+    font-family: "SF UI Display Semibold", sans-serif;;
+    font-size: 2.1rem;
+    padding: 7px 5px;
+}
+.details-original-title {
+    font-family: "SF UI Display Semibold", sans-serif;;
+    font-size: 1.1rem;
+    padding: 5px 5px;
+    color: #ffffff;
+}
+.details-container {
+    display: flex;
+    padding: 15px 5px;
+    height: 1500px;
+}
+.details-left-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+}
+.details-left-container img {
+    display: block;
+    width: 300px;
+    height: 485px;
+    box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.7);
+    border-radius: .25rem !important;
+    transition: .3s;
+    cursor: pointer;
+}
+.details-like-container {
+    display: flex;
+    justify-content: space-around;
+    font-family: "SF UI Display Medium", sans-serif;
+    width: 100%;
+    color: #B0B0B0;
+    padding: 10px 0;
+    margin: 5px 0;
+    font-size: .9rem;
+}
+.like, .dislike {
+    cursor: pointer;
+    padding: 5px;
+    -webkit-transition: .3s;
+    -moz-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+}
+.like svg, .dislike svg {
+    margin-right: 7px;
+}
+.like:hover {
+    color: #51fdba;
+}
+.dislike:hover {
+    color: #fc6262;
+}
+.details-rating-container {
+    font-family: "SF UI Text Light", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: #B0B0B0;
+    padding: 5px 13px 15px 13px;
+    margin: 5px 0;
+    border-bottom: 1px solid #323232;
+}
+.details-rating-container h6 {
+    font-weight: normal !important;
+    font-size: 0.85rem !important;
+}
+.popularity, .vote-average {
+    margin: 0 15px;
+    font-size: .9rem;
+}
+.popularity svg, .vote-average svg {
+    margin-right: 7px;
+    color: #ffffff;
+}
+.details-description-container {
+    font-family: "SF UI Text Light", sans-serif;
+    font-size: .85rem;
+    padding: 5px 13px;
+    color: #B0B0B0;
+}
+.details-description-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 3px;
+}
+.details-description-item .item-name {
+    width: 65px;
+    margin-right: 10px;
+}
+.details-right-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 784px;
+    margin: 0 auto;
+}
+.details-right-container iframe {
+    box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.7);
+    margin-bottom: 20px;
+}
+.details-right-container h6 {
+    font-family: "SF UI Text Light", sans-serif;
+    font-size: 1.1rem;
+    color: #ffffff;
+    margin: 10px 0;
+}
+.details-right-container p {
+    font-family: "SF UI Text Light", sans-serif;
+    font-size: .9rem;
+    color: #B0B0B0;
+}
+#yohoho {
+    width: 680px;
+    height: 423px;
+}
