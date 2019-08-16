@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="72768778-acd3-4986-8b14-168fa756354b" name="gofilmSFTP" url="http://198.187.29.6">
+        <fileTransfer host="198.187.29.6" port="21098" rootFolder="/home/gofirfxx/gofilm.io" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="21098" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

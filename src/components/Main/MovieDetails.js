@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import player from "../../service/player";
 import {connect} from "react-redux";
-import MainContainer from "./MainContainer"
 
 class MovieDetails extends Component {
     constructor(props) {
@@ -32,13 +30,6 @@ class MovieDetails extends Component {
                 this.setState({movie: results}, () => console.log(this.state.movie));
                 document.querySelector(".details-background").style.backgroundImage= `url(https://image.tmdb.org/t/p/w1280${this.state.movie.backdrop_path})`;
             });
-
-        // axios.get(`https://videocdn.tv/api/short`)
-        //
-        //     .then(response => {
-        //         const results = response.data;
-        //         console.log(results)
-        //     });
 
     }
 
@@ -105,8 +96,7 @@ class MovieDetails extends Component {
                             </div>
                         </section>
                         <section className={"details-right-container"}>
-                            <iframe src="https://videocdn.so/Lrp1Lw3x8ZCy/movie/22816" height="480" frameBorder="0" allowFullScreen></iframe>
-
+                            <iframe src="https://protectorat.cc/serial/b260e0c4e7bcf9760c1cfb6c8ed7bb30/iframe" height="485" frameBorder="0" allowFullScreen/>
 
                             <h6>Немного о фильме:</h6>
                             <p>{this.state.movie.overview}</p>

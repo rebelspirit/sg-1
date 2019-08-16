@@ -37,7 +37,6 @@ import MovieDetails from './components/Main/MovieDetails';
 import {bindActionCreators} from "redux";
 import {getMoviesFromApi, getSerialsFromApi} from "./actions";
 import connect from "react-redux/es/connect/connect";
-import MainContainer from "./components/Main/MainContainer";
 
 library.add(faSearch, faTh, faBell, faSignInAlt, faHome, faFire, faChevronRight, faFolder, faHistory, faClock, faThumbsUp, faFilm, faBaby, faTv, faList, faPizzaSlice, faCog, faFlag, faQuestionCircle, faCommentAlt, faChevronDown, faThumbsDown, faStar, faPoll);
 
