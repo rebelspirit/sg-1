@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {connect} from "react-redux";
 import video404 from "../../assets/img/404_video.png"
 
-class MovieDetails extends Component {
+class SerialDetails extends Component {
     constructor(props) {
         super(props);
 
@@ -25,14 +25,20 @@ class MovieDetails extends Component {
         window.scrollTo(0, 0);
 
         const api = '37381515063aba22627eb415da0adfe3';
-        axios.get(`https://api.themoviedb.org/3/movie/${this.state.id}?api_key=${api}&language=ru-UA`)
+        axios.get(`https://api.themoviedb.org/3/tv/${this.state.id}?api_key=${api}&language=ru-UA`)
 
             .then(response => {
                 const results = response.data;
                 this.setState({movie: results}, () => console.log(this.state.movie));
                 document.querySelector(".details-background").style.backgroundImage= `url(https://image.tmdb.org/t/p/w1280${results.backdrop_path})`;
+            });
 
-                axios.get(`https://videocdn.tv/api/movies?api_token=QDH5tZqrotr27szq3U9Yx2lEgunhKbuo&direction=desc&field=global&limit=10&ordering=last_media_accepted&imdb_id=${this.state.movie.imdb_id}`)
+        axios.get(`https://api.themoviedb.org/3/tv/${this.state.id}/external_ids?api_key=${api}&language=en-US`)
+            .then(response => {
+                const results = response.data;
+                console.log(results);
+
+                axios.get(`https://videocdn.tv/api/tv-series?api_token=QDH5tZqrotr27szq3U9Yx2lEgunhKbuo&direction=desc&field=global&limit=10&ordering=last_media_accepted&imdb_id=${results.imdb_id}`)
 
                     .then(response => {
                         const results = response.data;
@@ -44,8 +50,8 @@ class MovieDetails extends Component {
                     .catch(function (error) {
                         const iframe = document.querySelector("iframe");
                         iframe.src = video404;
-                    console.log(error);
-                })
+                        console.log(error);
+                    })
             })
     }
 
@@ -54,8 +60,8 @@ class MovieDetails extends Component {
             <main style={this.props.isToggleBurger ? this.state.openWidth : this.state.closedWidth}>
                 <div className={"details-background"}/>
                 <div className={'main-container'}>
-                    <h1 className={"details-title yellow"}>{this.state.movie.title}</h1>
-                    <h4 className={"details-original-title"}>{this.state.movie.original_title}</h4>
+                    <h1 className={"details-title pink"}>{this.state.movie.name}</h1>
+                    <h4 className={"details-original-title"}>{this.state.movie.original_name}</h4>
                     <div className={"details-container"}>
                         <section className={"details-left-container"}>
                             <img src={`https://image.tmdb.org/t/p/w1280${this.state.movie.poster_path}`} alt="poster"/>
@@ -127,4 +133,4 @@ const mapStateToProps = (state, props) => ({
     isToggleBurger: state.isToggleBurger,
 });
 
-export default connect(mapStateToProps, null)(MovieDetails);
+export default connect(mapStateToProps, null)(SerialDetails);

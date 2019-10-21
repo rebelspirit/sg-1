@@ -89,8 +89,10 @@ class Main extends Component {
                         <div className={'movies'}>
                             {Object.values(this.state.popularSerials).slice(0, 12).map((serial, key) =>
                                 <div key={key} className={'movies-item'}>
-                                    <img onClick={() => this.serialDetails(serial.id)} src={`https://image.tmdb.org/t/p/w1280${serial.poster_path}`} alt="poster"/>
-                                    <h6 onClick={() => this.serialDetails(serial.id)}>{serial.name}</h6>
+                                    <NavLink to={`/serials/${serial.id}`}>
+                                        <img className={'waves-image'} src={`https://image.tmdb.org/t/p/w1280${serial.poster_path}`} alt="poster"/>
+                                        <h6>{serial.name}</h6>
+                                    </NavLink>
                                     <p>{serial.origin_country}, {serial.first_air_date.slice(0, 4)}</p>
                                 </div>
                             )}

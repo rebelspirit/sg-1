@@ -251,8 +251,14 @@ main {
     margin: 0 auto;
 }
 .details-right-container iframe {
+    border: 0;
+    border-radius: .25rem !important;;
     box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.7);
     margin-bottom: 20px;
+    background-color: #000;
+    background-image: url(../../assets/img/Double-Ring-1.5s-130px.svg);
+    background-position: center center;
+    background-repeat: no-repeat;
 }
 .details-right-container h6 {
     font-family: "SF UI Text Light", sans-serif;
@@ -264,8 +270,4 @@ main {
     font-family: "SF UI Text Light", sans-serif;
     font-size: .9rem;
     color: #B0B0B0;
-}
-#yohoho {
-    width: 680px;
-    height: 423px;
 }

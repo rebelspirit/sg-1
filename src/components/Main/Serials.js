@@ -149,7 +149,7 @@ class Serials extends Component {
                         <div className={'movies'}>
                             {Object.values(this.props.serials).map((serial, key) =>
                                 <div key={key} className={'movies-item'}>
-                                    <NavLink to={`/serial/details/${serial.id}`}>
+                                    <NavLink to={`/serials/${serial.id}`}>
                                         <img src={`https://image.tmdb.org/t/p/w1280${serial.poster_path}`} alt="poster"/>
                                         <h6>{serial.name}</h6>
                                     </NavLink>
