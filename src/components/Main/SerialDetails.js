@@ -38,7 +38,7 @@ class SerialDetails extends Component {
                 const results = response.data;
                 console.log(results);
 
-                axios.get(`https://videocdn.tv/api/tv-series?api_token=QDH5tZqrotr27szq3U9Yx2lEgunhKbuo&direction=desc&field=global&limit=10&ordering=last_media_accepted&imdb_id=${results.imdb_id}`)
+                return axios.get(`https://videocdn.tv/api/tv-series?api_token=QDH5tZqrotr27szq3U9Yx2lEgunhKbuo&direction=desc&field=global&limit=10&ordering=last_media_accepted&imdb_id=${results.imdb_id}`)
 
                     .then(response => {
                         const results = response.data;

@@ -240,7 +240,7 @@ class Films extends Component {
                         <div className={'movies'}>
                                 {Object.values(this.props.movies).map((movie, key) =>
                                     <div key={key} className={'movies-item'}>
-                                        <NavLink to={`/details/${movie.id}`}>
+                                        <NavLink to={`/films/${movie.id}`}>
                                             <img src={`https://image.tmdb.org/t/p/w1280${movie.poster_path}`} alt="poster"/>
                                             <h6>{movie.title}</h6>
                                         </NavLink>

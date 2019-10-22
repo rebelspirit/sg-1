@@ -32,7 +32,7 @@ class MovieDetails extends Component {
                 this.setState({movie: results}, () => console.log(this.state.movie));
                 document.querySelector(".details-background").style.backgroundImage= `url(https://image.tmdb.org/t/p/w1280${results.backdrop_path})`;
 
-                axios.get(`https://videocdn.tv/api/movies?api_token=QDH5tZqrotr27szq3U9Yx2lEgunhKbuo&direction=desc&field=global&limit=10&ordering=last_media_accepted&imdb_id=${this.state.movie.imdb_id}`)
+                return axios.get(`https://videocdn.tv/api/movies?api_token=QDH5tZqrotr27szq3U9Yx2lEgunhKbuo&direction=desc&field=global&limit=10&ordering=last_media_accepted&imdb_id=${this.state.movie.imdb_id}`)
 
                     .then(response => {
                         const results = response.data;

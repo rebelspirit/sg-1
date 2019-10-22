@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
-import {Route, HashRouter} from "react-router-dom";
+import {Route, Switch, BrowserRouter as Router} from "react-router-dom";
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {
     faSearch,
@@ -39,6 +39,7 @@ import {bindActionCreators} from "redux";
 import {getMoviesFromApi, getSerialsFromApi} from "./actions";
 import connect from "react-redux/es/connect/connect";
 import PreLoader from "./components/PreLoader";
+import PageNotFound from "./components/PageNotFound";
 
 library.add(faSearch, faTh, faBell, faSignInAlt, faHome, faFire, faChevronRight, faFolder, faHistory, faClock, faThumbsUp, faFilm, faBaby, faTv, faList, faPizzaSlice, faCog, faFlag, faQuestionCircle, faCommentAlt, faChevronDown, faThumbsDown, faStar, faPoll);
 
@@ -64,24 +65,24 @@ class App extends Component {
             )
         }
         return (
-            <HashRouter history={this.history}>
+            <Router history={this.history}>
                 <div className={'app'}>
                     <Header/>
                     <div className={'container'}>
                         <LeftSideBar/>
-
+                            <Switch>
                                 <Route exact path="/" component={Main}/>
-                                <Route path="/films" component={Films}/>
+                                <Route exact path="/films" component={Films}/>
                                 <Route exact path="/serials" component={Serials}/>
                                 {/*<Route path="/cartoons" component={Cartoons}/>*/}
                                 {/*<Route path="/tvshows" component={Tvshows}/>*/}
-                                <Route path="/details/:id" component={MovieDetails}/>
+                                <Route path="/films/:id" component={MovieDetails}/>
                                 <Route path="/serials/:id" component={SerialDetails}/>
-                                {/*<Route path="/serial/details/:id" component={MovieDetails}/>*/}
-
+                                <Route path="*" component={PageNotFound} />
+                            </Switch>
                     </div>
                 </div>
-            </HashRouter>
+            </Router>
         );
     };
 }

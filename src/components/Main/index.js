@@ -70,7 +70,7 @@ class Main extends Component {
                         <div className={'movies'}>
                             {Object.values(this.state.popularMovie).slice(0, 12).map((movie, key) =>
                                 <div key={key} className={'movies-item'}>
-                                    <NavLink to={`/details/${movie.id}`}>
+                                    <NavLink to={`/films/${movie.id}`}>
                                         <img className={'waves-image'} src={`https://image.tmdb.org/t/p/w1280${movie.poster_path}`} alt="poster"/>
                                         <h6>{movie.title}</h6>
                                     </NavLink>

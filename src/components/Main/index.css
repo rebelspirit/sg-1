@@ -161,6 +161,7 @@ main {
 }
 .details-container {
     display: flex;
+    flex-wrap: wrap;
     padding: 15px 5px;
     height: 1500px;
 }
