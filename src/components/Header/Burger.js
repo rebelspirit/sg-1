@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {changeTodoColor, setActiveStatus} from "../../actions";
+import {setActiveStatus} from "../../actions";
 import {bindActionCreators} from "redux";
 
 class Burger extends React.Component {
@@ -9,13 +9,14 @@ class Burger extends React.Component {
         return (
             <div className={this.props.isToggleBurger ? 'burger open' : 'burger'}
                  onClick={() => {
+                     console.log(this);
                      this.props.onToggleBurger();
                  }}>
                 <button/>
             </div>
         )
     };
-};
+}
 
 const mapStateToProps = (state, props) => ({
     isToggleBurger: state.isToggleBurger,
@@ -23,7 +24,6 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     onToggleBurger: bindActionCreators(setActiveStatus, dispatch),
-    // onChangeTodoColor: bindActionCreators(changeTodoColor, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Burger);

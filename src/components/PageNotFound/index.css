@@ -4,7 +4,7 @@
     height: 100vh;
     text-align: center;
     color: #ffffff;
-    background-image: url(../../assets/img/404_pageNotFound.svg);
+    /*background-image: url(../../assets/img/404_pageNotFound.svg);*/
     background-position: center center;
     -webkit-background-size: cover;
     background-size: cover;

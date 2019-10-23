@@ -13,4 +13,8 @@ export class MoviesApi {
         return axios.get(`https://api.themoviedb.org/3/discover/tv?api_key=${api}${language}${region}&sort_by=popularity.desc&page=${page}&with_genres=${ganre}`)
             .then(response => response.data.results)
     }
+    static multiSearch(query) {
+        return axios.get(`https://api.themoviedb.org/3/search/multi?api_key=${api}${language}${region}&query=${query}`)
+            .then(response => response.data.results)
+    }
 }

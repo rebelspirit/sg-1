@@ -1,7 +1,8 @@
-import {SET_ACTIVE_STATUS, GET_MOVIES, LOAD_MORE_MOVIES, GET_SERIALS, LOAD_MORE_SERIALS} from "../actions";
+import {SET_ACTIVE_STATUS, GET_MOVIES, LOAD_MORE_MOVIES, GET_SERIALS, LOAD_MORE_SERIALS, GLOBAL_MULTI_SEARCH} from "../actions";
 
 const initialState = {
     isToggleBurger: true,
+    multiSearch: [],
     movies: [],
     serials: [],
 };
@@ -30,6 +31,10 @@ export default function (state = initialState, action) {
         case LOAD_MORE_SERIALS:
             return {
                 ...state, serials: [ ...state.serials, ...payload.serials ]
+            };
+        case GLOBAL_MULTI_SEARCH:
+            return {
+                ...state, multiSearch: payload.content
             };
 
         default:

@@ -54,3 +54,16 @@ export function loadMoreSerials(page, category) {
             )
     }
 }
+
+export const GLOBAL_MULTI_SEARCH = 'GLOBAL_MULTI_SEARCH';
+export function findDataByMultiSearch(query) {
+    return function (dispatch) {
+        MoviesApi.multiSearch(query)
+            .then(content =>
+                dispatch({
+                    type: GLOBAL_MULTI_SEARCH,
+                    payload: { content }
+                })
+            )
+    }
+}

@@ -40,6 +40,7 @@ import {getMoviesFromApi, getSerialsFromApi} from "./actions";
 import connect from "react-redux/es/connect/connect";
 import PreLoader from "./components/PreLoader";
 import PageNotFound from "./components/PageNotFound";
+import MultiSearch from "./components/Main/MultiSearch";
 
 library.add(faSearch, faTh, faBell, faSignInAlt, faHome, faFire, faChevronRight, faFolder, faHistory, faClock, faThumbsUp, faFilm, faBaby, faTv, faList, faPizzaSlice, faCog, faFlag, faQuestionCircle, faCommentAlt, faChevronDown, faThumbsDown, faStar, faPoll);
 
@@ -78,6 +79,7 @@ class App extends Component {
                                 {/*<Route path="/tvshows" component={Tvshows}/>*/}
                                 <Route path="/films/:id" component={MovieDetails}/>
                                 <Route path="/serials/:id" component={SerialDetails}/>
+                                <Route path="/search/" component={MultiSearch}/>
                                 <Route path="*" component={PageNotFound} />
                             </Switch>
                     </div>

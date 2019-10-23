@@ -1,9 +1,10 @@
 import React from 'react';
 import './index.css';
 import {NavLink} from "react-router-dom";
+import PageNotFound404 from "../../assets/img/404_pageNotFound.svg"
 
 const PageNotFound = () => (
-    <div className={"pageNotFound"}>
+    <div className={"pageNotFound"} style={{backgroundImage: `url(${PageNotFound404})`}}>
         <div className={"pageNotFound-content"}>
             <h2><span>404</span>
                 <br/>

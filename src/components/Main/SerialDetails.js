@@ -118,7 +118,7 @@ class SerialDetails extends Component {
                             </div>
                         </section>
                         <section className={"details-right-container"}>
-                            <iframe title={"movie"} height={485} allowFullScreen/>
+                            <iframe title={"movie"} height={485} width={784} allowFullScreen/>
 
                             <h6>Немного о фильме:</h6>
                             <p>{this.state.movie.overview}</p>

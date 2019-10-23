@@ -102,14 +102,18 @@ header {
 }
 .logo {
     font-family: 'SF UI Display Semibold', sans-serif;
-    color: #fff;
     font-size: 1.3rem;
     cursor: pointer;
     user-select: none;
     padding: 0 5px;
+    transition: .1s;
 }
-.logo svg {
-    margin-right: 5px;
+.logo a {
+    text-decoration: none;
+    color: #ffffff;
+}
+.logo:hover {
+    transform: scale(1.03);
 }
 .search-container {
     width: 100%;
