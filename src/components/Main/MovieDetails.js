@@ -11,7 +11,7 @@ class MovieDetails extends Component {
         this.state = {
             id: this.props.match.params.id,
             movie: {},
-            videocdn: {},
+            cdn: {},
             openWidth: {
                 paddingLeft: "240px",
             },
@@ -36,7 +36,7 @@ class MovieDetails extends Component {
 
                     .then(response => {
                         const results = response.data;
-                        this.setState({videocdn: results}, () => console.log(this.state.videocdn));
+                        this.setState({cdn: results}, () => console.log(this.state.cdn));
 
                         const iframe = document.querySelector("iframe");
                         iframe.src = results.data[0].iframe_src
@@ -46,7 +46,7 @@ class MovieDetails extends Component {
                         iframe.src = video404;
                     console.log(error);
                 })
-            })
+            });
     }
 
     render() {
@@ -94,7 +94,7 @@ class MovieDetails extends Component {
                                     <p className={"item-text"}>Драма, Военный</p>
                                 </div>
                                 <div className={"details-description-item"}>
-                                    <p className={"item-name"}>Язык:</p>
+                                    <p className={"item-name"}>Язык оригинала:</p>
                                     <p className={"item-text"}>{this.state.movie.original_language}</p>
                                 </div>
                                 <div className={"details-description-item"}>
@@ -103,11 +103,19 @@ class MovieDetails extends Component {
                                 </div>
                                 <div className={"details-description-item"}>
                                     <p className={"item-name"}>Время:</p>
-                                    <p className={"item-text"}>{this.state.movie.runtime} минуты</p>
+                                    <p className={"item-text"}>{this.state.movie.runtime} минут(ы)</p>
                                 </div>
                                 <div className={"details-description-item"}>
                                     <p className={"item-name"}>Возраст:</p>
                                     <p className={"item-text"}> 16+</p>
+                                </div>
+                                <div className={"details-description-item"}>
+                                    <p className={"item-name"}>Бюджет:</p>
+                                    <p className={"item-text"}>{this.state.movie.budget} $</p>
+                                </div>
+                                <div className={"details-description-item"}>
+                                    <p className={"item-name"}>Сбор:</p>
+                                    <p className={"item-text"}>{this.state.movie.revenue} $</p>
                                 </div>
                             </div>
                         </section>

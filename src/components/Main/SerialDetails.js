@@ -11,7 +11,7 @@ class SerialDetails extends Component {
         this.state = {
             id: this.props.match.params.id,
             movie: {},
-            videocdn: {},
+            cdn: {},
             openWidth: {
                 paddingLeft: "240px",
             },
@@ -42,7 +42,7 @@ class SerialDetails extends Component {
 
                     .then(response => {
                         const results = response.data;
-                        this.setState({videocdn: results}, () => console.log(this.state.videocdn));
+                        this.setState({cdn: results}, () => console.log(this.state.cdn));
 
                         const iframe = document.querySelector("iframe");
                         iframe.src = results.data[0].iframe_src
