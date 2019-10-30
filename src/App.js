@@ -71,17 +71,17 @@ class App extends Component {
                     <Header/>
                     <div className={'container'}>
                         <LeftSideBar/>
-                            <Switch>
-                                <Route exact path="/" component={Main}/>
-                                <Route exact path="/films" component={Films}/>
-                                <Route exact path="/serials" component={Serials}/>
-                                {/*<Route path="/cartoons" component={Cartoons}/>*/}
-                                {/*<Route path="/tvshows" component={Tvshows}/>*/}
-                                <Route path="/films/:id" component={MovieDetails}/>
-                                <Route path="/serials/:id" component={SerialDetails}/>
-                                <Route path="/search/" component={MultiSearch}/>
-                                <Route path="*" component={PageNotFound} />
-                            </Switch>
+                        <Switch>
+                            <Route exact path="/" component={Main}/>
+                            <Route exact path="/films" component={Films}/>
+                            <Route exact path="/serials" component={Serials}/>
+                            {/*<Route path="/cartoons" component={Cartoons}/>*/}
+                            {/*<Route path="/tvshows" component={Tvshows}/>*/}
+                            <Route path="/films/:id" component={MovieDetails}/>
+                            <Route path="/serials/:id" component={SerialDetails}/>
+                            <Route path="/search/" component={MultiSearch}/>
+                            <Route path="*" component={PageNotFound} />
+                        </Switch>
                     </div>
                 </div>
             </Router>

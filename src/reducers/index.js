@@ -1,7 +1,7 @@
 import {SET_ACTIVE_STATUS, GET_MOVIES, LOAD_MORE_MOVIES, GET_SERIALS, LOAD_MORE_SERIALS, GLOBAL_MULTI_SEARCH} from "../actions";
 
 const initialState = {
-    isToggleBurger: true,
+    isToggleBurger: false,
     multiSearch: [],
     movies: [],
     serials: [],

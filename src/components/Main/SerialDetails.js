@@ -3,6 +3,7 @@ import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {connect} from "react-redux";
 import video404 from "../../assets/img/404_video.png"
+import {ShareIcons} from "../ShareIcons";
 
 class SerialDetails extends Component {
     constructor(props) {
@@ -89,7 +90,7 @@ class SerialDetails extends Component {
                             <div className={"details-description-container"}>
                                 <div className={"details-description-item"}>
                                     <p className={"item-name"}>Год:</p>
-                                    <p className={"item-text"}>{this.state.movie.release_date}</p>
+                                    <p className={"item-text"}>{this.state.movie.first_air_date}</p>
                                 </div>
                                 <div className={"details-description-item"}>
                                     <p className={"item-name"}>Страна:</p>
@@ -115,13 +116,25 @@ class SerialDetails extends Component {
                                     <p className={"item-name"}>Возраст:</p>
                                     <p className={"item-text"}> 16+</p>
                                 </div>
+                                <div className={"details-description-item"}>
+                                    <p className={"item-name"}>Сезонов:</p>
+                                    <p className={"item-text"}>{this.state.movie.number_of_seasons}</p>
+                                </div>
+                                <div className={"details-description-item"}>
+                                    <p className={"item-name"}>Серий:</p>
+                                    <p className={"item-text"}>{this.state.movie.number_of_episodes}</p>
+                                </div>
+                                <div className={"details-description-item"}>
+                                    <p className={"item-name"}>Статус:</p>
+                                    <p className={"item-text"}>{this.state.movie.in_production ? "Продолжается" : "Завершен"}</p>
+                                </div>
                             </div>
                         </section>
                         <section className={"details-right-container"}>
                             <iframe title={"movie"} height={485} width={784} allowFullScreen/>
-
-                            <h6>Немного о фильме:</h6>
+                            <h6>Немного о сериале:</h6>
                             <p>{this.state.movie.overview}</p>
+                            <ShareIcons url={this.props.match.url} title={this.state.movie.name}/>
                         </section>
                     </div>
                 </div>

@@ -3,6 +3,7 @@ import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {connect} from "react-redux";
 import video404 from "../../assets/img/404_video.png"
+import { ShareIcons } from  "../ShareIcons";
 
 class MovieDetails extends Component {
     constructor(props) {
@@ -50,7 +51,7 @@ class MovieDetails extends Component {
     }
 
     render() {
-        return (
+        return this.state.movie ? (
             <main style={this.props.isToggleBurger ? this.state.openWidth : this.state.closedWidth}>
                 <div className={"details-background"}/>
                 <div className={'main-container'}>
@@ -121,15 +122,15 @@ class MovieDetails extends Component {
                         </section>
                         <section className={"details-right-container"}>
                             <iframe title={"movie"} height={485} width={784} allowFullScreen/>
-
                             <h6>Немного о фильме:</h6>
                             <p>{this.state.movie.overview}</p>
+                            <ShareIcons url={this.props.match.url} title={this.state.movie.title}/>
                         </section>
                     </div>
                 </div>
             </main>
-        )
-    };
+        ) : null
+    }
 }
 const mapStateToProps = (state, props) => ({
     isToggleBurger: state.isToggleBurger,
