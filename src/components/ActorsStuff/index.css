@@ -1,0 +1,28 @@
+.actors-stuff-container {
+    margin: 15px 0;
+}
+.actors-stuff {
+    display: flex;
+    justify-content: space-between;
+}
+.actor-stuff-item {
+    width: 11%;
+    padding: 3px;
+    cursor: pointer;
+}
+.actor-stuff-item img {
+    display: block;
+    width: 100%;
+    -webkit-border-radius: .2rem;
+    -moz-border-radius: .2rem;
+    border-radius: .2rem;
+    filter: brightness(.95);
+    box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.7);
+    transition: .3s;
+}
+.actor-stuff-item img:hover {
+    filter: brightness(110%);
+}
+.actor-stuff-item p {
+    margin: 3px 0;
+}

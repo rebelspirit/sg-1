@@ -14,7 +14,7 @@ class LeftSideBar extends Component {
                     home: {
                         name: "Главная",
                         icon: "home",
-                        link: "",
+                        link: "/",
                         sublinks: {
                             ukrainian: {
                                 name: "Украинский",

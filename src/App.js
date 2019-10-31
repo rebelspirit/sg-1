@@ -85,8 +85,8 @@ class App extends Component {
                     </div>
                 </div>
             </Router>
-        );
-    };
+        )
+    }
 }
 function demoAsyncCall() {
     return new Promise((resolve) => setTimeout(() => resolve(), 1000));

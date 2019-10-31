@@ -106,14 +106,16 @@ header {
     cursor: pointer;
     user-select: none;
     padding: 0 5px;
-    transition: .1s;
+    transition: .3s;
+    position: relative;
 }
 .logo a {
     text-decoration: none;
     color: #ffffff;
 }
 .logo:hover {
-    transform: scale(1.03);
+    -webkit-transform: translateX(5px);
+    transform: translateX(5px);
 }
 .search-container {
     width: 100%;

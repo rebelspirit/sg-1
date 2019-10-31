@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {connect} from "react-redux";
 import video404 from "../../assets/img/404_video.png"
 import {ShareIcons} from "../ShareIcons";
+import ActorsStuff from "../ActorsStuff";
 
 class SerialDetails extends Component {
     constructor(props) {
@@ -135,6 +136,7 @@ class SerialDetails extends Component {
                             <h6>Немного о сериале:</h6>
                             <p>{this.state.movie.overview}</p>
                             <ShareIcons url={this.props.match.url} title={this.state.movie.name}/>
+                            {/*<ActorsStuff id={this.props.match.params.id}/>*/}
                         </section>
                     </div>
                 </div>
