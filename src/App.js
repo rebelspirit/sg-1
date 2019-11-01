@@ -75,7 +75,7 @@ class App extends Component {
                             <Route exact path="/" component={Main}/>
                             <Route exact path="/films" component={Films}/>
                             <Route exact path="/serials" component={Serials}/>
-                            {/*<Route path="/cartoons" component={Cartoons}/>*/}
+                            <Route path="/cartoons" component={MovieDetails}/>
                             {/*<Route path="/tvshows" component={Tvshows}/>*/}
                             <Route path="/films/:id" component={MovieDetails}/>
                             <Route path="/serials/:id" component={SerialDetails}/>

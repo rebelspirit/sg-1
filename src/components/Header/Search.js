@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from "react-redux";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {bindActionCreators} from "redux";
@@ -9,19 +9,35 @@ const Search = (props) => {
 
     const history = useHistory();
 
+
+
+    const sendSearchRequest = () => {
+        const input = document.querySelector("input");
+
+        if(input.value.length !== 0 && input.value.length >= 3) {
+            history.push("/search");
+            props.findDataByMultiSearch(input.value);
+        }
+    };
+
+    const searchWhenEnterPress = (event) => {
+        if(event.charCode === 13) {
+            sendSearchRequest();
+        }
+    };
+
     return (
         <div className={'search-container'}>
-            <form>
-                <input type="text" placeholder={'Введите запрос'}/>
+            <div className={'search-field'}>
+                <input type="text"
+                       placeholder={'Введите запрос'}
+                       onKeyPress={searchWhenEnterPress}
+                />
                 <button type={'button'}
-                        onClick={() => {
-                            const input = document.querySelector("input");
-                            history.push("/search");
-                            props.findDataByMultiSearch(input.value);
-                        }}>
+                        onClick={sendSearchRequest}>
                     <FontAwesomeIcon icon={'search'} />
                 </button>
-            </form>
+            </div>
         </div>
     );
 };

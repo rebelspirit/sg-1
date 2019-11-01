@@ -108,7 +108,7 @@ class Main extends Component {
                         <div className={'movies'}>
                             {Object.values(this.state.popularCartoons).slice(0, 12).map((cartoons, key) =>
                                 <div key={key} className={'movies-item'}>
-                                    <NavLink to={`/details/${cartoons.id}`}>
+                                    <NavLink to={`/cartoons/${cartoons.id}`}>
                                         <img className={'waves-image'} src={`https://image.tmdb.org/t/p/w1280${cartoons.poster_path}`} alt="poster"/>
                                         <h6>{cartoons.title}</h6>
                                     </NavLink>

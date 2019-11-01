@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import video404 from "../../assets/img/404_video.png"
 import {ShareIcons} from "../ShareIcons";
 import ActorsStuff from "../ActorsStuff";
+import RelatedContent from "../RelatedContent";
 
 class SerialDetails extends Component {
     constructor(props) {
@@ -12,6 +13,7 @@ class SerialDetails extends Component {
 
         this.state = {
             id: this.props.match.params.id,
+            type: "tv",
             movie: {},
             cdn: {},
             openWidth: {
@@ -136,7 +138,8 @@ class SerialDetails extends Component {
                             <h6>Немного о сериале:</h6>
                             <p>{this.state.movie.overview}</p>
                             <ShareIcons url={this.props.match.url} title={this.state.movie.name}/>
-                            {/*<ActorsStuff id={this.props.match.params.id}/>*/}
+                            <ActorsStuff id={this.props.match.params.id} type={this.state.type}/>
+                            <RelatedContent id={this.props.match.params.id} type={this.state.type}/>
                         </section>
                     </div>
                 </div>

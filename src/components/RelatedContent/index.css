@@ -1,0 +1,28 @@
+.related-content-container {
+    margin: 15px 0;
+}
+.related-content {
+    display: flex;
+    justify-content: space-between;
+}
+.related-content-item {
+    width: 16%;
+    padding: 3px;
+    cursor: pointer;
+}
+.related-content-item img {
+    display: block;
+    width: 100%;
+    -webkit-border-radius: .2rem;
+    -moz-border-radius: .2rem;
+    border-radius: .2rem;
+    filter: brightness(.95);
+    box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.7);
+    transition: .3s;
+}
+.related-content-item img:hover {
+    filter: brightness(110%);
+}
+.related-content-item p {
+    margin: 7px 0;
+}

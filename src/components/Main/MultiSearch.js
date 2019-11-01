@@ -50,11 +50,13 @@ class MultiSearch extends Component {
                             <div className={'movies'}>
                                 {Object.values(this.props.multiSearch).map((content, key) =>
                                     <div key={key} className={'movies-item'}>
+                                        {console.log(content)}
                                         <NavLink to={content.media_type === "movie" ? `/films/${content.id}` : `/serials/${content.id}`}>
-                                            <img src={`https://image.tmdb.org/t/p/w1280${content.poster_path}`} alt="poster"/>
+                                            {content.media_type !== "person" ? <img src={`https://image.tmdb.org/t/p/w1280${content.poster_path}`} alt="poster"/> : <img src={`https://image.tmdb.org/t/p/w1280${content.profile_path}`} alt="poster"/>}
                                             <h6>{content.title ? content.title : content.name}</h6>
                                         </NavLink>
-                                        <p>США, {content.release_date ? content.release_date.slice(0, 4) : content.first_air_date.slice(0, 4)}</p>
+                                        {content.media_type === "movie" ? <p>США, {content.release_date.slice(0, 4)}</p> : null}
+                                        {content.media_type === "tv" ? <p>США, {content.first_air_date.slice(0, 4)}</p> : null}
                                     </div>
                                 )}
                             </div>
