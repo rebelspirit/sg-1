@@ -36,31 +36,31 @@ import Serials from './components/Main/Serials';
 import MovieDetails from './components/Main/MovieDetails';
 import SerialDetails from './components/Main/SerialDetails'
 import {bindActionCreators} from "redux";
-import {getMoviesFromApi, getSerialsFromApi} from "./actions";
+import {getMoviesFromApi, getSerialsFromApi, getPopularMovies, getPopularSerials, getCartoons, getTvShows} from "./actions";
 import connect from "react-redux/es/connect/connect";
 import PreLoader from "./components/PreLoader";
 import PageNotFound from "./components/PageNotFound";
 import MultiSearch from "./components/Main/MultiSearch";
+import TEST from './components/Main/TEST';
 
 library.add(faSearch, faTh, faBell, faSignInAlt, faHome, faFire, faChevronRight, faFolder, faHistory, faClock, faThumbsUp, faFilm, faBaby, faTv, faList, faPizzaSlice, faCog, faFlag, faQuestionCircle, faCommentAlt, faChevronDown, faThumbsDown, faStar, faPoll);
 
 
 class App extends Component {
 
-    state = {
-        loading: true
-    };
     componentDidMount() {
+        this.props.getPopularMovies();
+        this.props.getPopularSerials();
+        this.props.getCartoons();
+        this.props.getTvShows();
         this.props.getMoviesFromApi();
         this.props.getSerialsFromApi();
-        demoAsyncCall().then(() => this.setState({ loading: false }));
     }
 
-
     render() {
-        const { loading } = this.state;
+        const { isLoadingMovies, isLoadingSerials } = this.props;
 
-        if(loading) { // if your component doesn't have to wait for an async action, remove this block
+        if(isLoadingMovies && isLoadingSerials) {
             return (
                 <PreLoader/>
             )
@@ -75,7 +75,8 @@ class App extends Component {
                             <Route exact path="/" component={Main}/>
                             <Route exact path="/films" component={Films}/>
                             <Route exact path="/serials" component={Serials}/>
-                            <Route path="/cartoons" component={MovieDetails}/>
+                            <Route exact path="/test" component={TEST}/>
+                            {/*<Route path="/cartoons" component={MovieDetails}/>*/}
                             {/*<Route path="/tvshows" component={Tvshows}/>*/}
                             <Route path="/films/:id" component={MovieDetails}/>
                             <Route path="/serials/:id" component={SerialDetails}/>
@@ -88,12 +89,18 @@ class App extends Component {
         )
     }
 }
-function demoAsyncCall() {
-    return new Promise((resolve) => setTimeout(() => resolve(), 1000));
-}
-const mapDispatchtoProps = (dispatch) => ({
+
+const mapStateToProps = (state) => ({
+    isLoadingMovies: state.isLoadingMovies,
+    isLoadingSerials: state.isLoadingSerials
+});
+const mapDispatchToProps = (dispatch) => ({
     getMoviesFromApi: bindActionCreators(getMoviesFromApi, dispatch),
     getSerialsFromApi: bindActionCreators(getSerialsFromApi, dispatch),
+    getPopularMovies: bindActionCreators(getPopularMovies, dispatch),
+    getPopularSerials: bindActionCreators(getPopularSerials, dispatch),
+    getCartoons: bindActionCreators(getCartoons, dispatch),
+    getTvShows: bindActionCreators(getTvShows, dispatch)
 });
 
-export default connect(null, mapDispatchtoProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -10,6 +10,9 @@
     padding: 3px;
     cursor: pointer;
 }
+.related-content-item {
+    text-decoration: none;
+}
 .related-content-item img {
     display: block;
     width: 100%;
@@ -25,4 +28,5 @@
 }
 .related-content-item p {
     margin: 7px 0;
+    text-decoration: none;
 }

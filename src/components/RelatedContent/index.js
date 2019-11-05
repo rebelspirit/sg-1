@@ -14,12 +14,13 @@ const RelatedContent = (props) => {
                 console.log(results)
             })
     }, []);
+
     return (
         <div className={"related-content-container"}>
             <h6>Похожий материал:</h6>
             <div className={"related-content"}>
                 {Object.values(relatedContent).map((content, key) =>
-                    content.poster_path ? <div className={"related-content-item"} key={key}>
+                    content.poster_path ? <div className={"related-content-item"} key={key} onClick={() => props.pushToRelatedContent(content.id)}>
                         <img src={`https://image.tmdb.org/t/p/w1280${content.poster_path}`} alt="poster"/>
                         <p>{props.type === "movie" ? content.title : content.name}</p>
                     </div> : null

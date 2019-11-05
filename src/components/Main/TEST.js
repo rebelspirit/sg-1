@@ -4,16 +4,17 @@ import {NavLink} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {connect} from "react-redux";
 
-const Main = (props) => {
+const TEST = (props) => {
     const [openWidth] = useState({paddingLeft: "240px"});
     const [closedWidth] = useState({paddingLeft: "60px"});
 
     useEffect(() => {
-        window.scrollTo(0, 0);
+
     }, []);
 
     return (
         <main style={props.isToggleBurger ? openWidth : closedWidth}>
+            {console.log(props)}
             <div className={'main-container'}>
                 <div className={'row'}>
                     <NavLink to={"/films"} className={'movie-type yellow'}>
@@ -104,4 +105,4 @@ const mapStateToProps = (state, props) => ({
 
 });
 
-export default connect(mapStateToProps, null)(Main);
+export default connect(mapStateToProps, null)(TEST);

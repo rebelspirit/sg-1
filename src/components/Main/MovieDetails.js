@@ -35,6 +35,7 @@ class MovieDetails extends Component {
                 const results = response.data;
                 this.setState({movie: results}, () => console.log(this.state.movie));
                 document.querySelector(".details-background").style.backgroundImage= `url(https://image.tmdb.org/t/p/w1280${results.backdrop_path})`;
+                document.title = `${results.title} - gofilm.io`;
 
                 return axios.get(`https://videocdn.tv/api/movies?api_token=QDH5tZqrotr27szq3U9Yx2lEgunhKbuo&direction=desc&field=global&limit=10&ordering=last_media_accepted&imdb_id=${this.state.movie.imdb_id}`)
 
@@ -52,8 +53,22 @@ class MovieDetails extends Component {
                 })
             });
     }
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.id !== prevState.id) {
+            console.log("prevState: ", prevState)
+
+        }
+    }
+    componentWillUnmount() {
+        document.title = "gofilm.io - онлайн кинотеатр";
+    }
+
+    pushToRelatedContent = (id) => {
+        this.setState({id: `${id}`}, () => console.log("pushToRelatedContent with id: ", this.state.id))
+    };
 
     render() {
+        console.log("render");
         return this.state.movie ? (
             <main style={this.props.isToggleBurger ? this.state.openWidth : this.state.closedWidth}>
                 <div className={"details-background"}/>
@@ -129,7 +144,7 @@ class MovieDetails extends Component {
                             <p>{this.state.movie.overview}</p>
                             <ShareIcons url={this.props.match.url} title={this.state.movie.title}/>
                             <ActorsStuff id={this.props.match.params.id} type={this.state.type}/>
-                            <RelatedContent id={this.props.match.params.id} type={this.state.type}/>
+                            <RelatedContent id={this.props.match.params.id} type={this.state.type} pushToRelatedContent={this.pushToRelatedContent}/>
                         </section>
                     </div>
                 </div>

@@ -3,9 +3,11 @@ import {MoviesApi} from "../service/moviesAPI";
 export const SET_ACTIVE_STATUS = 'SET_ACTIVE_STATUS';
 export const setActiveStatus = () => ({ type: SET_ACTIVE_STATUS });
 
+export const IS_LOADING_MOVIES = "IS_LOADING_MOVIES";
 export const GET_MOVIES = 'GET_MOVIES';
 export function getMoviesFromApi(page, category) {
     return function (dispatch) {
+        dispatch({type: IS_LOADING_MOVIES});
         MoviesApi.getMovies(page, category)
             .then(movies =>
                 dispatch({
@@ -29,9 +31,11 @@ export function loadMoreMovies(page, category) {
     }
 }
 
+export const IS_LOADING_SERIALS = "IS_LOADING_SERIALS";
 export const GET_SERIALS = 'GET_SERIALS';
 export function getSerialsFromApi(page, category) {
     return function (dispatch) {
+        dispatch({type: IS_LOADING_SERIALS});
         MoviesApi.getSerials(page, category)
             .then(serials =>
                 dispatch({
@@ -63,6 +67,62 @@ export function findDataByMultiSearch(query) {
                 dispatch({
                     type: GLOBAL_MULTI_SEARCH,
                     payload: { content }
+                })
+            )
+    }
+}
+
+export const GET_POPULAR_MOVIES = 'GET_POPULAR_MOVIES';
+export function getPopularMovies() {
+    return function (dispatch) {
+        // dispatch({type: IS_LOADING_SERIALS});
+        MoviesApi.getPopularMovies()
+            .then(popularMovies =>
+                dispatch({
+                    type: GET_POPULAR_MOVIES,
+                    payload: { popularMovies }
+                })
+            )
+    }
+}
+
+export const GET_POPULAR_SERIALS = 'GET_POPULAR_SERIALS';
+export function getPopularSerials() {
+    return function (dispatch) {
+        // dispatch({type: IS_LOADING_SERIALS});
+        MoviesApi.getPopularSerials()
+            .then(popularSerials =>
+                dispatch({
+                    type: GET_POPULAR_SERIALS,
+                    payload: { popularSerials }
+                })
+            )
+    }
+}
+
+export const GET_CARTOONS = 'GET_CARTOONS';
+export function getCartoons() {
+    return function (dispatch) {
+        // dispatch({type: IS_LOADING_SERIALS});
+        MoviesApi.getCartoons()
+            .then(cartoons =>
+                dispatch({
+                    type: GET_CARTOONS,
+                    payload: { cartoons }
+                })
+            )
+    }
+}
+
+export const GET_TVSHOWS = 'GET_TVSHOWS';
+export function getTvShows() {
+    return function (dispatch) {
+        // dispatch({type: IS_LOADING_SERIALS});
+        MoviesApi.getTvShows()
+            .then(tvShows =>
+                dispatch({
+                    type: GET_TVSHOWS,
+                    payload: { tvShows }
                 })
             )
     }
