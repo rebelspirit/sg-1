@@ -26,22 +26,20 @@ class MovieDetails extends Component {
     }
 
     componentDidMount() {
-        window.scrollTo(0, 0);
 
         const api = '37381515063aba22627eb415da0adfe3';
         axios.get(`https://api.themoviedb.org/3/movie/${this.state.id}?api_key=${api}&language=ru-UA`)
 
             .then(response => {
                 const results = response.data;
-                this.setState({movie: results}, () => console.log(this.state.movie));
-                document.querySelector(".details-background").style.backgroundImage= `url(https://image.tmdb.org/t/p/w1280${results.backdrop_path})`;
+                this.setState({movie: results});
                 document.title = `${results.title} - gofilm.io`;
 
                 return axios.get(`https://videocdn.tv/api/movies?api_token=QDH5tZqrotr27szq3U9Yx2lEgunhKbuo&direction=desc&field=global&limit=10&ordering=last_media_accepted&imdb_id=${this.state.movie.imdb_id}`)
 
                     .then(response => {
                         const results = response.data;
-                        this.setState({cdn: results}, () => console.log(this.state.cdn));
+                        this.setState({cdn: results});
 
                         const iframe = document.querySelector("iframe");
                         iframe.src = results.data[0].iframe_src
@@ -53,12 +51,7 @@ class MovieDetails extends Component {
                 })
             });
     }
-    componentDidUpdate(prevProps, prevState) {
-        if (this.state.id !== prevState.id) {
-            console.log("prevState: ", prevState)
 
-        }
-    }
     componentWillUnmount() {
         document.title = "gofilm.io - онлайн кинотеатр";
     }
@@ -68,10 +61,9 @@ class MovieDetails extends Component {
     };
 
     render() {
-        console.log("render");
-        return this.state.movie ? (
+        return this.state.movie.hasOwnProperty('backdrop_path') ? (
             <main style={this.props.isToggleBurger ? this.state.openWidth : this.state.closedWidth}>
-                <div className={"details-background"}/>
+                {this.state.movie.backdrop_path && <div style={{ backgroundImage: `url(https://image.tmdb.org/t/p/w1280${this.state.movie.backdrop_path})` }} className={"details-background"}/>}
                 <div className={'main-container'}>
                     <h1 className={"details-title yellow"}>{this.state.movie.title}</h1>
                     <h4 className={"details-original-title"}>{this.state.movie.original_title}</h4>

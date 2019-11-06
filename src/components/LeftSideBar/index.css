@@ -21,6 +21,7 @@ aside {
     min-height: 40px;
 }
 .itemName {
+    position: relative;
     font-family: "SF UI Display Regular", sans-serif;
     display: flex;
     align-items: center;
@@ -45,32 +46,58 @@ aside {
     min-width: 50px;
     padding: 0 10px;
 }
+.nav-icon.nav-icon-right {
+    margin-left: auto;
+    justify-content: flex-end;
+}
 .itemName h5 {
     font-size: 1rem;
     font-weight: 400;
 }
-ul {
-    display: none;
+.chevron-circle-down:after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: -7px;
+    right: 14px;
+    width: 14px;
+    height: 14px;
+    background: #1b1b1b;
+    transform: rotate(45deg);
     -webkit-transition: .3s;
     -moz-transition: .3s;
     -o-transition: .3s;
     transition: .3s;
 }
-.item:hover ul {
-    display: block;
+.itemName:hover.itemName:after {
+    background-color: #323232;
+
 }
-ul li {
+.sublinks {
+    display: none;
+    background: #101010;
+}
+.sublinks-item {
+    font-family: "SF UI Display Regular", sans-serif;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     min-height: 40px;
-    padding: 10px 5px;
+    padding: 10px 5px 10px 55px;
+    color: #B0B0B0;
+    text-decoration: none;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
     -webkit-transition: .3s;
     -moz-transition: .3s;
     -o-transition: .3s;
     transition: .3s;
 }
-ul li:hover {
-    background-color: #323232;
+.sublinks-item:hover {
     color: #ffffff;
+    border-top: 1px solid #323232;
+    border-bottom: 1px solid #323232;
+}
+.sublinks-item-active {
+    display: block;
 }

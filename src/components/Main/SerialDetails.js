@@ -26,7 +26,6 @@ class SerialDetails extends Component {
     }
 
     componentDidMount() {
-        window.scrollTo(0, 0);
 
         const api = '37381515063aba22627eb415da0adfe3';
         axios.get(`https://api.themoviedb.org/3/tv/${this.state.id}?api_key=${api}&language=ru-UA`)

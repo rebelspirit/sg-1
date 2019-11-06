@@ -96,9 +96,6 @@ class Serials extends Component {
             }
         };
     };
-    componentDidMount() {
-        window.scrollTo(0, 0)
-    }
 
     setCategory = (id) => {
         this.setState({

@@ -1,0 +1,358 @@
+Index: src/components/Main/index.js
+===================================================================
+--- src/components/Main/index.js	(revision b71e5c794bbe42988b3929d720a340b243d6b912)
++++ src/components/Main/index.js	(date 1572982954382)
+@@ -1,19 +1,19 @@
+-import React, {useState, useEffect} from 'react';
++import React, {useEffect} from 'react';
+ import './index.css';
+ import {NavLink} from "react-router-dom";
+ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+-import {connect} from "react-redux";
++import { useSelector } from 'react-redux'
+ 
+ const Main = (props) => {
+-    const [openWidth] = useState({paddingLeft: "240px"});
+-    const [closedWidth] = useState({paddingLeft: "60px"});
+ 
+-    useEffect(() => {
+-        window.scrollTo(0, 0);
+-    }, []);
++    const isToggledBurger = useSelector((store) => store.isToggleBurger);
++    const popularMovies = useSelector((store) => store.popularMovies);
++    const popularSerials = useSelector((store) => store.popularSerials);
++    const cartoons = useSelector((store) => store.cartoons);
++    const tvShows = useSelector((store) => store.tvShows);
+ 
+     return (
+-        <main style={props.isToggleBurger ? openWidth : closedWidth}>
++        <main style={isToggledBurger ? {paddingLeft: "240px"} : {paddingLeft: "60px"}}>
+             <div className={'main-container'}>
+                 <div className={'row'}>
+                     <NavLink to={"/films"} className={'movie-type yellow'}>
+@@ -23,7 +23,7 @@
+                         Фильмы
+                     </NavLink>
+                     <div className={'movies'}>
+-                        {Object.values(props.popularMovies).slice(0, 12).map((movie, key) =>
++                        {Object.values(popularMovies).slice(0, 12).map((movie, key) =>
+                             <div key={key} className={'movies-item'}>
+                                 <NavLink to={`/films/${movie.id}`}>
+                                     <img className={'waves-image'} src={`https://image.tmdb.org/t/p/w1280${movie.poster_path}`} alt="poster"/>
+@@ -42,7 +42,7 @@
+                         Сериалы
+                     </NavLink>
+                     <div className={'movies'}>
+-                        {Object.values(props.popularSerials).slice(0, 12).map((serial, key) =>
++                        {Object.values(popularSerials).slice(0, 12).map((serial, key) =>
+                             <div key={key} className={'movies-item'}>
+                                 <NavLink to={`/serials/${serial.id}`}>
+                                     <img className={'waves-image'} src={`https://image.tmdb.org/t/p/w1280${serial.poster_path}`} alt="poster"/>
+@@ -61,7 +61,7 @@
+                         Мультфильмы
+                     </NavLink>
+                     <div className={'movies'}>
+-                        {Object.values(props.cartoons).slice(0, 12).map((cartoons, key) =>
++                        {Object.values(cartoons).slice(0, 12).map((cartoons, key) =>
+                             <div key={key} className={'movies-item'}>
+                                 <NavLink to={`/cartoons/${cartoons.id}`}>
+                                     <img className={'waves-image'} src={`https://image.tmdb.org/t/p/w1280${cartoons.poster_path}`} alt="poster"/>
+@@ -80,7 +80,7 @@
+                         Передачи и шоу
+                     </NavLink>
+                     <div className={'movies'}>
+-                        {Object.values(props.tvShows).slice(0, 12).map((tvshows, key) =>
++                        {Object.values(tvShows).slice(0, 12).map((tvshows, key) =>
+                             <div key={key} className={'movies-item'}>
+                                 <NavLink to={`/details/${tvshows.id}`}>
+                                     <img className={'waves-image'} src={`https://image.tmdb.org/t/p/w1280${tvshows.poster_path}`} alt="poster"/>
+@@ -95,13 +95,5 @@
+         </main>
+     )
+ };
+-const mapStateToProps = (state, props) => ({
+-    isToggleBurger: state.isToggleBurger,
+-    popularMovies: state.popularMovies,
+-    popularSerials: state.popularSerials,
+-    cartoons: state.cartoons,
+-    tvShows: state.tvShows,
+ 
+-});
+-
+-export default connect(mapStateToProps, null)(Main);
+\ No newline at end of file
++export default Main;
+Index: src/components/Main/MovieDetails.js
+===================================================================
+--- src/components/Main/MovieDetails.js	(revision b71e5c794bbe42988b3929d720a340b243d6b912)
++++ src/components/Main/MovieDetails.js	(date 1572983963674)
+@@ -26,22 +26,20 @@
+     }
+ 
+     componentDidMount() {
+-        window.scrollTo(0, 0);
+ 
+         const api = '37381515063aba22627eb415da0adfe3';
+         axios.get(`https://api.themoviedb.org/3/movie/${this.state.id}?api_key=${api}&language=ru-UA`)
+ 
+             .then(response => {
+                 const results = response.data;
+-                this.setState({movie: results}, () => console.log(this.state.movie));
+-                document.querySelector(".details-background").style.backgroundImage= `url(https://image.tmdb.org/t/p/w1280${results.backdrop_path})`;
++                this.setState({movie: results});
+                 document.title = `${results.title} - gofilm.io`;
+ 
+                 return axios.get(`https://videocdn.tv/api/movies?api_token=QDH5tZqrotr27szq3U9Yx2lEgunhKbuo&direction=desc&field=global&limit=10&ordering=last_media_accepted&imdb_id=${this.state.movie.imdb_id}`)
+ 
+                     .then(response => {
+                         const results = response.data;
+-                        this.setState({cdn: results}, () => console.log(this.state.cdn));
++                        this.setState({cdn: results});
+ 
+                         const iframe = document.querySelector("iframe");
+                         iframe.src = results.data[0].iframe_src
+@@ -53,12 +51,7 @@
+                 })
+             });
+     }
+-    componentDidUpdate(prevProps, prevState) {
+-        if (this.state.id !== prevState.id) {
+-            console.log("prevState: ", prevState)
+ 
+-        }
+-    }
+     componentWillUnmount() {
+         document.title = "gofilm.io - онлайн кинотеатр";
+     }
+@@ -68,10 +61,9 @@
+     };
+ 
+     render() {
+-        console.log("render");
+-        return this.state.movie ? (
++        return this.state.movie.hasOwnProperty('backdrop_path') ? (
+             <main style={this.props.isToggleBurger ? this.state.openWidth : this.state.closedWidth}>
+-                <div className={"details-background"}/>
++                {this.state.movie.backdrop_path && <div style={{ backgroundImage: `url(https://image.tmdb.org/t/p/w1280${this.state.movie.backdrop_path})` }} className={"details-background"}/>}
+                 <div className={'main-container'}>
+                     <h1 className={"details-title yellow"}>{this.state.movie.title}</h1>
+                     <h4 className={"details-original-title"}>{this.state.movie.original_title}</h4>
+@@ -156,4 +148,4 @@
+     isToggleBurger: state.isToggleBurger,
+ });
+ 
+-export default connect(mapStateToProps, null)(MovieDetails);
+\ No newline at end of file
++export default connect(mapStateToProps, null)(MovieDetails);
+Index: src/components/RelatedContent/index.js
+===================================================================
+--- src/components/RelatedContent/index.js	(revision b71e5c794bbe42988b3929d720a340b243d6b912)
++++ src/components/RelatedContent/index.js	(date 1572981968384)
+@@ -29,4 +29,4 @@
+         </div>
+     )
+ };
+-export default RelatedContent;
+\ No newline at end of file
++export default RelatedContent;
+Index: src/components/ScrollToTop/index.js
+===================================================================
+--- src/components/ScrollToTop/index.js	(date 1572983008218)
++++ src/components/ScrollToTop/index.js	(date 1572983008218)
+@@ -0,0 +1,12 @@
++import { useEffect } from "react";
++import { useLocation } from "react-router-dom";
++
++export default function ScrollToTop() {
++	const { pathname } = useLocation();
++
++	useEffect(() => {
++		window.scrollTo(0, 0);
++	}, [pathname]);
++
++	return null;
++}
+Index: src/App.js
+===================================================================
+--- src/App.js	(revision b71e5c794bbe42988b3929d720a340b243d6b912)
++++ src/App.js	(date 1572983049457)
+@@ -1,106 +1,84 @@
+-import React, {Component} from 'react';
+-import './App.css';
+-import {Route, Switch, BrowserRouter as Router} from "react-router-dom";
+-import {library} from '@fortawesome/fontawesome-svg-core';
++import React, { useEffect } from 'react'
++import './App.css'
++import { BrowserRouter as Router, Route, Switch, useHistory } from 'react-router-dom'
++import { library } from '@fortawesome/fontawesome-svg-core'
+ import {
+-    faSearch,
+-    faTh,
+-    faBell,
+-    faSignInAlt,
+-    faHome,
+-    faFire,
+-    faChevronRight,
+-    faFolder,
+-    faHistory,
+-    faClock,
+-    faThumbsUp,
+-    faFilm,
+-    faBaby,
+-    faTv,
+-    faList,
+-    faPizzaSlice,
+-    faCog,
+-    faFlag,
+-    faQuestionCircle,
+-    faCommentAlt,
+-    faChevronDown,
+-    faThumbsDown,
+-    faStar,
+-    faPoll
++	faBaby,
++	faBell,
++	faChevronDown,
++	faChevronRight,
++	faClock,
++	faCog,
++	faCommentAlt,
++	faFilm,
++	faFire,
++	faFlag,
++	faFolder,
++	faHistory,
++	faHome,
++	faList,
++	faPizzaSlice,
++	faPoll,
++	faQuestionCircle,
++	faSearch,
++	faSignInAlt,
++	faStar,
++	faTh,
++	faThumbsDown,
++	faThumbsUp,
++	faTv,
+ } from '@fortawesome/free-solid-svg-icons'
+-import Header from './components/Header';
+-import LeftSideBar from './components/LeftSideBar';
+-import Main from './components/Main';
+-import Films from './components/Main/Films';
+-import Serials from './components/Main/Serials';
+-import MovieDetails from './components/Main/MovieDetails';
++import Header from './components/Header'
++import LeftSideBar from './components/LeftSideBar'
++import Main from './components/Main'
++import Films from './components/Main/Films'
++import Serials from './components/Main/Serials'
++import MovieDetails from './components/Main/MovieDetails'
+ import SerialDetails from './components/Main/SerialDetails'
+-import {bindActionCreators} from "redux";
+-import {getMoviesFromApi, getSerialsFromApi, getPopularMovies, getPopularSerials, getCartoons, getTvShows} from "./actions";
+-import connect from "react-redux/es/connect/connect";
+-import PreLoader from "./components/PreLoader";
+-import PageNotFound from "./components/PageNotFound";
+-import MultiSearch from "./components/Main/MultiSearch";
+-import TEST from './components/Main/TEST';
++import PageNotFound from './components/PageNotFound'
++import MultiSearch from './components/Main/MultiSearch'
++import TEST from './components/Main/TEST'
++import { useDispatch } from 'react-redux'
++import { getCartoons, getPopularMovies, getPopularSerials, getTvShows } from './actions'
++import ScrollToTop from './components/ScrollToTop'
+ 
+-library.add(faSearch, faTh, faBell, faSignInAlt, faHome, faFire, faChevronRight, faFolder, faHistory, faClock, faThumbsUp, faFilm, faBaby, faTv, faList, faPizzaSlice, faCog, faFlag, faQuestionCircle, faCommentAlt, faChevronDown, faThumbsDown, faStar, faPoll);
+ 
++library.add(faSearch, faTh, faBell, faSignInAlt, faHome, faFire, faChevronRight, faFolder, faHistory, faClock, faThumbsUp, faFilm, faBaby, faTv, faList, faPizzaSlice, faCog, faFlag, faQuestionCircle, faCommentAlt, faChevronDown, faThumbsDown, faStar, faPoll)
+ 
+-class App extends Component {
+ 
+-    componentDidMount() {
+-        this.props.getPopularMovies();
+-        this.props.getPopularSerials();
+-        this.props.getCartoons();
+-        this.props.getTvShows();
+-        this.props.getMoviesFromApi();
+-        this.props.getSerialsFromApi();
+-    }
++const App = () => {
++	const dispatch = useDispatch();
+ 
+-    render() {
+-        const { isLoadingMovies, isLoadingSerials } = this.props;
++	useEffect(() => {
++		dispatch(getPopularMovies())
++		dispatch(getPopularSerials())
++		dispatch(getCartoons())
++		dispatch(getTvShows())
++	}, [])
+ 
+-        if(isLoadingMovies && isLoadingSerials) {
+-            return (
+-                <PreLoader/>
+-            )
+-        }
+-        return (
+-            <Router history={this.history}>
+-                <div className={'app'}>
+-                    <Header/>
+-                    <div className={'container'}>
+-                        <LeftSideBar/>
+-                        <Switch>
+-                            <Route exact path="/" component={Main}/>
+-                            <Route exact path="/films" component={Films}/>
+-                            <Route exact path="/serials" component={Serials}/>
+-                            <Route exact path="/test" component={TEST}/>
+-                            {/*<Route path="/cartoons" component={MovieDetails}/>*/}
+-                            {/*<Route path="/tvshows" component={Tvshows}/>*/}
+-                            <Route path="/films/:id" component={MovieDetails}/>
+-                            <Route path="/serials/:id" component={SerialDetails}/>
+-                            <Route path="/search/" component={MultiSearch}/>
+-                            <Route path="*" component={PageNotFound} />
+-                        </Switch>
+-                    </div>
+-                </div>
+-            </Router>
+-        )
+-    }
++	return (
++		<Router>
++			<ScrollToTop />
++			<div className={'app'}>
++				<Header />
++				<div className={'container'}>
++					<LeftSideBar />
++					<Switch>
++						<Route exact path="/" component={Main} />
++						<Route exact path="/films" component={Films} />
++						<Route exact path="/serials" component={Serials} />
++						<Route exact path="/test" component={TEST} />
++						{/*<Route path="/cartoons" component={MovieDetails}/>*/}
++						{/*<Route path="/tvshows" component={Tvshows}/>*/}
++						<Route path="/films/:id" component={MovieDetails} />
++						<Route path="/serials/:id" component={SerialDetails} />
++						<Route path="/search/" component={MultiSearch} />
++						<Route path="*" component={PageNotFound} />
++					</Switch>
++				</div>
++			</div>
++		</Router>
++	)
+ }
+ 
+-const mapStateToProps = (state) => ({
+-    isLoadingMovies: state.isLoadingMovies,
+-    isLoadingSerials: state.isLoadingSerials
+-});
+-const mapDispatchToProps = (dispatch) => ({
+-    getMoviesFromApi: bindActionCreators(getMoviesFromApi, dispatch),
+-    getSerialsFromApi: bindActionCreators(getSerialsFromApi, dispatch),
+-    getPopularMovies: bindActionCreators(getPopularMovies, dispatch),
+-    getPopularSerials: bindActionCreators(getPopularSerials, dispatch),
+-    getCartoons: bindActionCreators(getCartoons, dispatch),
+-    getTvShows: bindActionCreators(getTvShows, dispatch)
+-});
+-
+-export default connect(mapStateToProps, mapDispatchToProps)(App);
++export default App

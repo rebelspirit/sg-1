@@ -24,11 +24,6 @@ class Films extends Component {
             },
             filmsNavigation: {
                 firstColumn: {
-                    ukrainian: {
-                        name: "Украинский",
-                        link: "/ukrainian",
-                        id: ""
-                    },
                     military: {
                         name: "Военный",
                         link: "/military",
@@ -53,14 +48,9 @@ class Films extends Component {
                         name: "Триллер",
                         link: "/thriller",
                         id: "53"
-                    }
+                    },
                 },
                 secondColumn: {
-                    anime: {
-                        name: "Аниме",
-                        link: "/anime",
-                        id: ""
-                    },
                     detective: {
                         name: "Детектив",
                         link: "/detective",
@@ -76,23 +66,13 @@ class Films extends Component {
                         link: "/melodrama",
                         id: "10749"
                     },
-                    tvshow: {
-                        name: "ТВ-шоу",
-                        link: "/tvshow",
-                        id: ""
-                    },
                     horrors: {
                         name: "Ужасы",
                         link: "/horrors",
                         id: "27"
-                    }
+                    },
                 },
                 thirdColumn: {
-                    biography: {
-                        name: "Биография",
-                        link: "/biography",
-                        id: ""
-                    },
                     childly: {
                         name: "Детский",
                         link: "/childly",
@@ -113,37 +93,12 @@ class Films extends Component {
                         link: "/family",
                         id: "10751"
                     },
-                    filmnoir: {
-                        name: "Фильм-Нуар",
-                        link: "/filmnoir",
-                        id: ""
-                    }
                 },
                 fourthColumn: {
                     thriller: {
                         name: "Боевик",
                         link: "/thriller",
                         id: "28"
-                    },
-                    adults: {
-                        name: "Для взрослых",
-                        link: "/adults",
-                        id: ""
-                    },
-                    shortfilm: {
-                        name: "Короткометражка",
-                        link: "/shortfilm",
-                        id: ""
-                    },
-                    musical: {
-                        name: "Мюзикл",
-                        link: "/musical",
-                        id: ""
-                    },
-                    sport: {
-                        name: "Спорт",
-                        link: "/sport",
-                        id: ""
                     },
                     syfy: {
                         name: "Фантастика",
@@ -162,21 +117,6 @@ class Films extends Component {
                         link: "/documentary",
                         id: "99"
                     },
-                    concert: {
-                        name: "Концерт",
-                        link: "/concert",
-                        id: ""
-                    },
-                    news: {
-                        name: "Новости",
-                        link: "/news",
-                        id: ""
-                    },
-                    talkshow: {
-                        name: "Ток-шоу",
-                        link: "/talkshow",
-                        id: ""
-                    },
                     fantasy: {
                         name: "Фэнтези",
                         link: "/fantasy",
@@ -186,10 +126,6 @@ class Films extends Component {
             }
         };
     };
-
-    componentDidMount() {
-        window.scrollTo(0, 0)
-    }
 
     setCategory = (id) => {
         this.setState({
