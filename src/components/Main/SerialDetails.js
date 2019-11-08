@@ -60,7 +60,7 @@ class SerialDetails extends Component {
 
     render() {
         return (
-            <main style={this.props.isToggleBurger ? this.state.openWidth : this.state.closedWidth}>
+            <main>
                 <div className={"details-background"}/>
                 <div className={'main-container'}>
                     <h1 className={"details-title pink"}>{this.state.movie.name}</h1>

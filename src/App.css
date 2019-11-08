@@ -246,4 +246,5 @@ body {
 }
 .container {
   display: flex;
+  position: relative;
 }

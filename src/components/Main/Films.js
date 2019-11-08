@@ -140,7 +140,7 @@ class Films extends Component {
 
     render() {
         return (
-            <main style={this.props.isToggleBurger ? this.state.openWidth : this.state.closedWidth}>
+            <main>
                 <div className={'main-container'}>
                     <div className={'row'}>
                         <h2 className={'movie-type yellow'} onClick={this.openCategory}>

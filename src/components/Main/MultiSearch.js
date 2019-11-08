@@ -5,11 +5,9 @@ import {connect} from "react-redux";
 import {NavLink} from "react-router-dom";
 
 const MultiSearch = (props) => {
-    const [openWidth] = useState({paddingLeft: "240px"});
-    const [closedWidth] = useState({paddingLeft: "60px"});
 
     return (
-        <main style={props.isToggleBurger ? openWidth : closedWidth}>
+        <main>
             <div className={'main-container'}>
                 <div className={'row'}>
                     <h2 className={'movie-type yellow'}>

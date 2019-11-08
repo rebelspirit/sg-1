@@ -1,108 +1,55 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import './index.css';
-import {NavLink} from "react-router-dom";
+import Loader from "../Loader";
+import {useDispatch, useSelector} from "react-redux";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {connect} from "react-redux";
+import {getMoviesFromApi, loadMoreMovies} from "../../actions";
+import InfiniteScroll from 'react-infinite-scroller';
+import {NavLink} from "react-router-dom";
 
-const TEST = (props) => {
-    const [openWidth] = useState({paddingLeft: "240px"});
-    const [closedWidth] = useState({paddingLeft: "60px"});
+const TEST = () => {
+    const movies = useSelector((store) => store.movies);
+    const dispatch = useDispatch();
+    const [page, setPage] = useState(0);
 
     useEffect(() => {
-
-    }, []);
+        dispatch(getMoviesFromApi(page));
+        console.log(page)
+    }, [page]);
 
     return (
-        <main style={props.isToggleBurger ? openWidth : closedWidth}>
-            {console.log(props)}
+        <main>
             <div className={'main-container'}>
                 <div className={'row'}>
-                    <NavLink to={"/films"} className={'movie-type yellow'}>
+                    <h2 className={'movie-type yellow'}>
                         <div className="nav-icon">
                             <FontAwesomeIcon icon={"film"} />
                         </div>
                         Фильмы
-                    </NavLink>
-                    <div className={'movies'}>
-                        {Object.values(props.popularMovies).slice(0, 12).map((movie, key) =>
-                            <div key={key} className={'movies-item'}>
-                                <NavLink to={`/films/${movie.id}`}>
-                                    <img className={'waves-image'} src={`https://image.tmdb.org/t/p/w1280${movie.poster_path}`} alt="poster"/>
-                                    <h6>{movie.title}</h6>
-                                </NavLink>
-                                <p>США, {movie.release_date.slice(0, 4)}</p>
-                            </div>
-                        )}
-                    </div>
-                </div>
-                <div className={'row'}>
-                    <NavLink to={"/serials"} className={'movie-type pink'}>
-                        <div className="nav-icon">
-                            <FontAwesomeIcon icon={"pizza-slice"} />
+                    </h2>
+                    <InfiniteScroll
+                        pageStart={page}
+                        loadMore={() => setPage(1)}
+                        hasMore={true}
+                        loader={<Loader key={0}/>}
+                        useWindow={true}
+                        threshold={500}
+                    >
+                        <div className={'movies'}>
+                            {Object.values(movies).map((movie, key) =>
+                                <div key={key} className={'movies-item'}>
+                                    <NavLink to={`/films/${movie.id}`}>
+                                        <img src={`https://image.tmdb.org/t/p/w1280${movie.poster_path}`} alt="poster"/>
+                                        <h6>{movie.title}</h6>
+                                    </NavLink>
+                                    <p>США, {movie.release_date.slice(0, 4)}</p>
+                                </div>
+                            )}
                         </div>
-                        Сериалы
-                    </NavLink>
-                    <div className={'movies'}>
-                        {Object.values(props.popularSerials).slice(0, 12).map((serial, key) =>
-                            <div key={key} className={'movies-item'}>
-                                <NavLink to={`/serials/${serial.id}`}>
-                                    <img className={'waves-image'} src={`https://image.tmdb.org/t/p/w1280${serial.poster_path}`} alt="poster"/>
-                                    <h6>{serial.name}</h6>
-                                </NavLink>
-                                <p>{serial.origin_country}, {serial.first_air_date.slice(0, 4)}</p>
-                            </div>
-                        )}
-                    </div>
-                </div>
-                <div className={'row'}>
-                    <NavLink to={"/cartoons"} className={'movie-type green'}>
-                        <div className="nav-icon">
-                            <FontAwesomeIcon icon={"baby"} />
-                        </div>
-                        Мультфильмы
-                    </NavLink>
-                    <div className={'movies'}>
-                        {Object.values(props.cartoons).slice(0, 12).map((cartoons, key) =>
-                            <div key={key} className={'movies-item'}>
-                                <NavLink to={`/cartoons/${cartoons.id}`}>
-                                    <img className={'waves-image'} src={`https://image.tmdb.org/t/p/w1280${cartoons.poster_path}`} alt="poster"/>
-                                    <h6>{cartoons.title}</h6>
-                                </NavLink>
-                                <p>США, {cartoons.release_date.slice(0, 4)}</p>
-                            </div>
-                        )}
-                    </div>
-                </div>
-                <div className={'row'}>
-                    <NavLink to={"/tvshows"} className={'movie-type blue'}>
-                        <div className="nav-icon">
-                            <FontAwesomeIcon icon={"tv"} />
-                        </div>
-                        Передачи и шоу
-                    </NavLink>
-                    <div className={'movies'}>
-                        {Object.values(props.tvShows).slice(0, 12).map((tvshows, key) =>
-                            <div key={key} className={'movies-item'}>
-                                <NavLink to={`/details/${tvshows.id}`}>
-                                    <img className={'waves-image'} src={`https://image.tmdb.org/t/p/w1280${tvshows.poster_path}`} alt="poster"/>
-                                    <h6>{tvshows.title}</h6>
-                                </NavLink>
-                                <p>США, {tvshows.first_air_date.slice(0, 4)}</p>
-                            </div>
-                        )}
-                    </div>
+                    </InfiniteScroll>
                 </div>
             </div>
         </main>
-    )
-};
-const mapStateToProps = (state, props) => ({
-    isToggleBurger: state.isToggleBurger,
-    popularMovies: state.popularMovies,
-    popularSerials: state.popularSerials,
-    cartoons: state.cartoons,
-    tvShows: state.tvShows,
+    )};
 
-});
-
-export default connect(mapStateToProps, null)(TEST);
+export default TEST;

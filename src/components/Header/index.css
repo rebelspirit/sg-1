@@ -151,6 +151,13 @@ header {
     color: #B0B0B0;
     padding: 5px 10px;
     cursor: pointer;
+    -webkit-transition: .3s;
+    -moz-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+}
+.search-container .search-field button:hover {
+    color: #ffffff;
 }
 .movie-container,
 .notification-container,

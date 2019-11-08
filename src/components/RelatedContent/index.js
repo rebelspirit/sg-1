@@ -13,7 +13,7 @@ const RelatedContent = (props) => {
                 setRelatedContent(results.slice(0, 6));
                 console.log(results)
             })
-    }, []);
+    }, [props.id, props.type]);
 
     return (
         <div className={"related-content-container"}>

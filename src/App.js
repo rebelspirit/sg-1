@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import './App.css'
-import { BrowserRouter as Router, Route, Switch, useHistory } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
 	faBaby,
@@ -26,8 +26,7 @@ import {
 	faTh,
 	faThumbsDown,
 	faThumbsUp,
-	faTv,
-	faChevronCircleDown
+	faTv
 } from '@fortawesome/free-solid-svg-icons'
 import Header from './components/Header'
 import LeftSideBar from './components/LeftSideBar'
@@ -42,9 +41,10 @@ import TEST from './components/Main/TEST'
 import { useDispatch } from 'react-redux'
 import { getCartoons, getPopularMovies, getPopularSerials, getTvShows } from './actions'
 import ScrollToTop from './components/ScrollToTop'
+import WindowFreeze from "./components/WindowFreeze";
 
 
-library.add(faSearch, faTh, faBell, faSignInAlt, faHome, faFire, faChevronRight, faFolder, faHistory, faClock, faThumbsUp, faFilm, faBaby, faTv, faList, faPizzaSlice, faCog, faFlag, faQuestionCircle, faCommentAlt, faChevronDown, faThumbsDown, faStar, faPoll, faChevronCircleDown);
+library.add(faSearch, faTh, faBell, faSignInAlt, faHome, faFire, faChevronRight, faFolder, faHistory, faClock, faThumbsUp, faFilm, faBaby, faTv, faList, faPizzaSlice, faCog, faFlag, faQuestionCircle, faCommentAlt, faChevronDown, faThumbsDown, faStar, faPoll);
 
 
 const App = () => {
@@ -64,12 +64,13 @@ const App = () => {
 				<Header />
 				<div className={'container'}>
 					<LeftSideBar />
+					<WindowFreeze/>
 					<Switch>
 						<Route exact path="/" component={Main} />
 						<Route exact path="/films" component={Films} />
 						<Route exact path="/serials" component={Serials} />
 						<Route exact path="/test" component={TEST} />
-						{/*<Route path="/cartoons" component={MovieDetails}/>*/}
+						{/*<Route path="/cartoons" component={Films}/>*/}
 						{/*<Route path="/tvshows" component={Tvshows}/>*/}
 						<Route path="/films/:id" component={MovieDetails} />
 						<Route path="/serials/:id" component={SerialDetails} />

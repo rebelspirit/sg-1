@@ -4,16 +4,15 @@ import {NavLink} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { useSelector } from 'react-redux'
 
-const Main = (props) => {
-
-    const isToggledBurger = useSelector((store) => store.isToggleBurger);
+const Main = () => {
+    //const isToggledBurger = useSelector((store) => store.isToggleBurger);
     const popularMovies = useSelector((store) => store.popularMovies);
     const popularSerials = useSelector((store) => store.popularSerials);
     const cartoons = useSelector((store) => store.cartoons);
     const tvShows = useSelector((store) => store.tvShows);
 
     return (
-        <main style={isToggledBurger ? {paddingLeft: "240px"} : {paddingLeft: "60px"}}>
+        <main>
             <div className={'main-container'}>
                 <div className={'row'}>
                     <NavLink to={"/films"} className={'movie-type yellow'}>

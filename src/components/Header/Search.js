@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {connect} from "react-redux";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {bindActionCreators} from "redux";
@@ -6,10 +6,7 @@ import {findDataByMultiSearch} from "../../actions";
 import {useHistory} from "react-router-dom";
 
 const Search = (props) => {
-
     const history = useHistory();
-
-
 
     const sendSearchRequest = () => {
         const input = document.querySelector("input");

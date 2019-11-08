@@ -62,7 +62,7 @@ class MovieDetails extends Component {
 
     render() {
         return this.state.movie.hasOwnProperty('backdrop_path') ? (
-            <main style={this.props.isToggleBurger ? this.state.openWidth : this.state.closedWidth}>
+            <main>
                 {this.state.movie.backdrop_path && <div style={{ backgroundImage: `url(https://image.tmdb.org/t/p/w1280${this.state.movie.backdrop_path})` }} className={"details-background"}/>}
                 <div className={'main-container'}>
                     <h1 className={"details-title yellow"}>{this.state.movie.title}</h1>

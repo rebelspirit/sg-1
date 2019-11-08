@@ -12,7 +12,7 @@ const ActorsStuff = (props) => {
                 const results = response.data;
                 setActors(results.cast.slice(0, 9));
             })
-    }, []);
+    }, [props.id, props.type]);
     return (
         <div className={"actors-stuff-container"}>
             <h6>Актерский состав:</h6>

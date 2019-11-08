@@ -1,10 +1,35 @@
 aside {
     width: 100%;
     background-color: #1b1b1b;
-    min-height: 100vh;
-    padding-top: 60px;
+    min-height: 700px;
+    max-height: 100vh;
+    margin-top: 60px;
     position: fixed;
     z-index: 10;
+    overflow-y: scroll;
+    padding-bottom: 250px;
+}
+/* width */
+aside::-webkit-scrollbar {
+    width: 2px;
+}
+aside:hover::-webkit-scrollbar {
+    width: 2px;
+}
+aside:hover::-webkit-scrollbar-thumb {
+    background-color: #323232;
+}
+/* Track */
+aside::-webkit-scrollbar-track {
+    background-color: #141414;
+}
+/* Handle */
+aside::-webkit-scrollbar-thumb {
+    background-color: #141414;
+    border-radius: 16px;
+}
+aside::-webkit-scrollbar-button {
+    display:none;
 }
 .navigation {
     display: flex;
@@ -20,7 +45,37 @@ aside {
     transition: .3s;
     min-height: 40px;
 }
-.itemName {
+.button-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    -webkit-transition: .3s;
+    -moz-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+    z-index: 1;
+}
+.button-container:hover {
+    background-color: #323232;
+}
+.button-container:hover .nav-icon-right {
+    color: #ffffff;
+}
+.button-container .nav-icon-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    width: 100%;
+    max-width: 40px;
+    color: #B0B0B0;
+    padding: 10px 5px;
+    transition: all 0.4s ease;
+}
+.button-container .itemName {
+    width: 100%;
+}
+.button-container .itemName {
     position: relative;
     font-family: "SF UI Display Regular", sans-serif;
     display: flex;
@@ -30,54 +85,23 @@ aside {
     padding: 10px 5px;
     color: #B0B0B0;
     text-decoration: none;
-    -webkit-transition: .3s;
-    -moz-transition: .3s;
-    -o-transition: .3s;
-    transition: .3s;
 }
-.itemName:hover {
-    background-color: #323232;
-    color: #ffffff;
-}
-.itemName .nav-icon {
+.button-container .itemName .nav-icon {
     display: flex;
     align-items: center;
     justify-content: center;
     min-width: 50px;
     padding: 0 10px;
 }
-.nav-icon.nav-icon-right {
-    margin-left: auto;
-    justify-content: flex-end;
-}
-.itemName h5 {
+.button-container .itemName h5 {
     font-size: 1rem;
     font-weight: 400;
 }
-.chevron-circle-down:after {
-    content: '';
-    display: block;
-    position: absolute;
-    bottom: -7px;
-    right: 14px;
-    width: 14px;
-    height: 14px;
-    background: #1b1b1b;
-    transform: rotate(45deg);
-    -webkit-transition: .3s;
-    -moz-transition: .3s;
-    -o-transition: .3s;
-    transition: .3s;
-}
-.itemName:hover.itemName:after {
-    background-color: #323232;
-
-}
-.sublinks {
+.item .sublinks {
     display: none;
     background: #101010;
 }
-.sublinks-item {
+.item .sublinks .sublinks-item {
     font-family: "SF UI Display Regular", sans-serif;
     display: flex;
     align-items: center;
@@ -93,11 +117,14 @@ aside {
     -o-transition: .3s;
     transition: .3s;
 }
-.sublinks-item:hover {
+.item .sublinks .sublinks-item:hover {
     color: #ffffff;
     border-top: 1px solid #323232;
     border-bottom: 1px solid #323232;
 }
-.sublinks-item-active {
+.item .sublinks-item-active {
     display: block;
+}
+.arrow-rotate {
+    transform: rotate(180deg);
 }
