@@ -1,19 +1,19 @@
 import React from 'react';
-import {connect} from "react-redux";
+import {useDispatch} from "react-redux";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {bindActionCreators} from "redux";
 import {findDataByMultiSearch} from "../../actions";
 import {useHistory} from "react-router-dom";
 
-const Search = (props) => {
+const Search = () => {
     const history = useHistory();
+    const dispatch = useDispatch();
 
     const sendSearchRequest = () => {
         const input = document.querySelector("input");
 
         if(input.value.length !== 0 && input.value.length >= 3) {
             history.push("/search");
-            props.findDataByMultiSearch(input.value);
+            dispatch(findDataByMultiSearch(input.value));
         }
     };
 
@@ -39,7 +39,4 @@ const Search = (props) => {
     );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-    findDataByMultiSearch: bindActionCreators(findDataByMultiSearch, dispatch)
-});
-export default connect(null, mapDispatchToProps)(Search)
+export default Search

@@ -15,7 +15,7 @@ const ActorsStuff = (props) => {
     }, [props.id, props.type]);
     return (
         <div className={"actors-stuff-container"}>
-            <h6>Актерский состав:</h6>
+            {actors.length ? <h6>Актерский состав:</h6> : null}
             <div className={"actors-stuff"}>
                 {Object.values(actors).map((actor, key) =>
                     actor.profile_path ? <div className={"actor-stuff-item"} key={key}>

@@ -17,7 +17,7 @@ const RelatedContent = (props) => {
 
     return (
         <div className={"related-content-container"}>
-            <h6>Похожий материал:</h6>
+            {relatedContent.length ? <h6>Похожий материал:</h6> : null}
             <div className={"related-content"}>
                 {Object.values(relatedContent).map((content, key) =>
                     content.poster_path ? <div className={"related-content-item"} key={key} onClick={() => props.pushToRelatedContent(content.id)}>

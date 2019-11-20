@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './index.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {connect} from "react-redux";
+import {useSelector} from "react-redux";
 import {NavLink} from "react-router-dom";
 
-const MultiSearch = (props) => {
+const MultiSearch = () => {
+    const multiSearch = useSelector((store) => store.multiSearch);
 
     return (
         <main>
@@ -14,18 +15,18 @@ const MultiSearch = (props) => {
                         <div className="nav-icon">
                             <FontAwesomeIcon icon={"search"} />
                         </div>
-                        Поиск по каталогу..
+                        {multiSearch.length ? `Найдено ${multiSearch.length} совпадений..` : `В каталоге совпадений не найдено`}
                     </h2>
                     <div className={'movies'}>
-                        {Object.values(props.multiSearch).map((content, key) =>
+                        {Object.values(multiSearch).map((content, key) =>
                             <div key={key} className={'movies-item'}>
                                 {console.log(content)}
                                 <NavLink to={content.media_type === "movie" ? `/films/${content.id}` : `/serials/${content.id}`}>
                                     {content.media_type !== "person" ? <img src={`https://image.tmdb.org/t/p/w1280${content.poster_path}`} alt="poster"/> : <img src={`https://image.tmdb.org/t/p/w1280${content.profile_path}`} alt="poster"/>}
                                     <h6>{content.title ? content.title : content.name}</h6>
                                 </NavLink>
-                                {content.media_type === "movie" ? <p>США, {content.release_date.slice(0, 4)}</p> : null}
-                                {content.media_type === "tv" ? <p>США, {content.first_air_date.slice(0, 4)}</p> : null}
+                                {content.media_type === "movie" && content.release_date ? <p>США, {content.release_date.slice(0, 4)}</p> : null}
+                                {content.media_type === "tv" && content.first_air_date ? <p>США, {content.first_air_date.slice(0, 4)}</p> : null}
                             </div>
                         )}
                     </div>
@@ -34,9 +35,4 @@ const MultiSearch = (props) => {
         </main>
     )};
 
-const mapStateToProps = (state, props) => ({
-    isToggleBurger: state.isToggleBurger,
-    multiSearch: state.multiSearch,
-});
-
-export default connect(mapStateToProps, null)(MultiSearch);
+export default MultiSearch;

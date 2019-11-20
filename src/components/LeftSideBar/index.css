@@ -1,11 +1,13 @@
 aside {
     width: 100%;
-    background-color: #1b1b1b;
+    max-width: 60px;
+    background-color: rgba(27, 27, 27, 0.98);
     min-height: 700px;
-    max-height: 100vh;
+    /*max-height: 100vh;*/
+    height: 100%;
     margin-top: 60px;
     position: fixed;
-    z-index: 10;
+    z-index: 100;
     overflow-y: scroll;
     padding-bottom: 250px;
 }
@@ -49,17 +51,7 @@ aside::-webkit-scrollbar-button {
     position: relative;
     display: flex;
     align-items: center;
-    -webkit-transition: .3s;
-    -moz-transition: .3s;
-    -o-transition: .3s;
-    transition: .3s;
     z-index: 1;
-}
-.button-container:hover {
-    background-color: #323232;
-}
-.button-container:hover .nav-icon-right {
-    color: #ffffff;
 }
 .button-container .nav-icon-right {
     display: flex;
@@ -85,6 +77,10 @@ aside::-webkit-scrollbar-button {
     padding: 10px 5px;
     color: #B0B0B0;
     text-decoration: none;
+    -webkit-transition: .15s;
+    -moz-transition: .15s;
+    -o-transition: .15s;
+    transition: .15s;
 }
 .button-container .itemName .nav-icon {
     display: flex;
@@ -122,9 +118,23 @@ aside::-webkit-scrollbar-button {
     border-top: 1px solid #323232;
     border-bottom: 1px solid #323232;
 }
+.button-container:hover {
+    background-color: #323232;
+}
+.button-container .itemName:hover {
+    color: #fafafa;
+}
+.button-container .nav-icon-right:hover {
+    color: #ffffff;
+}
 .item .sublinks-item-active {
     display: block;
 }
 .arrow-rotate {
     transform: rotate(180deg);
+}
+@media screen and (max-width: 450px) {
+    aside {
+        max-width: 0;
+    }
 }

@@ -1,5 +1,6 @@
 import {
-    SET_ACTIVE_STATUS,
+    CHANGE_ACTIVE_STATUS,
+    CLOSE_BURGER,
     GET_MOVIES,
     LOAD_MORE_MOVIES,
     GET_SERIALS,
@@ -10,12 +11,14 @@ import {
     GET_POPULAR_MOVIES,
     GET_POPULAR_SERIALS,
     GET_CARTOONS,
-    GET_TVSHOWS
+    GET_TVSHOWS,
+    GET_CONTENT_DETAILS
 } from "../actions";
 
 const initialState = {
     isToggleBurger: false,
     multiSearch: [],
+    ContentDetails: [],
     movies: [],
     serials: [],
     popularMovies: [],
@@ -30,7 +33,12 @@ export default function (state = initialState, action) {
     const {type, payload} = action;
 
     switch (type) {
-        case SET_ACTIVE_STATUS:
+        case CLOSE_BURGER:
+            return {
+                ...state,
+                isToggleBurger: false
+            };
+        case CHANGE_ACTIVE_STATUS:
             return {
                 ...state,
                 isToggleBurger: !state.isToggleBurger
@@ -81,7 +89,10 @@ export default function (state = initialState, action) {
             return {
                 ...state, tvShows: payload.tvShows
             };
-
+        case GET_CONTENT_DETAILS:
+            return {
+                ...state, ContentDetails: payload.details
+            };
         default:
             return state
     }

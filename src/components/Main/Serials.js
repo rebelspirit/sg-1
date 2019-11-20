@@ -102,6 +102,7 @@ class Serials extends Component {
             currentCategory: id,
             page: 1,
         }, () => this.props.getSerialsFromApi(1, this.state.currentCategory));
+        this.openCategory();
     };
 
     openCategory = () => {
@@ -112,16 +113,16 @@ class Serials extends Component {
         return (
             <main>
                 <div className={'main-container'}>
+                    <h2 className={'movie-type pink'} onClick={this.openCategory}>
+                        <div className="nav-icon">
+                            <FontAwesomeIcon icon={"pizza-slice"} />
+                        </div>
+                        Сериалы
+                        <div className={this.state.isOpenCategory ? 'arrow-right arrow-right-rotate' : 'arrow-right'}>
+                            <FontAwesomeIcon icon={"chevron-down"} />
+                        </div>
+                    </h2>
                     <div className={'row'}>
-                        <h2 className={'movie-type pink'} onClick={this.openCategory}>
-                            <div className="nav-icon">
-                                <FontAwesomeIcon icon={"pizza-slice"} />
-                            </div>
-                            Сериалы
-                            <div className={this.state.isOpenCategory ? 'arrow-right arrow-right-rotate' : 'arrow-right'}>
-                                <FontAwesomeIcon icon={"chevron-down"} />
-                            </div>
-                        </h2>
                         <div className={this.state.isOpenCategory ? 'category category-open' : 'category'}>
                             {Object.values(this.state.serialsNavigation).map((col, key) =>
                                 <div className={"category-container pink"} key={key}>
@@ -145,13 +146,13 @@ class Serials extends Component {
                         >
                         <div className={'movies'}>
                             {Object.values(this.props.serials).map((serial, key) =>
-                                <div key={key} className={'movies-item'}>
+                                serial.poster_path && serial.name ? <div key={key} className={'movies-item'}>
                                     <NavLink to={`/serials/${serial.id}`}>
                                         <img src={`https://image.tmdb.org/t/p/w1280${serial.poster_path}`} alt="poster"/>
                                         <h6>{serial.name}</h6>
                                     </NavLink>
                                     <p>{serial.origin_country}, {serial.first_air_date.slice(0, 4)}</p>
-                                </div>
+                                </div> : null
                             )}
                         </div>
                         </InfiniteScroll>

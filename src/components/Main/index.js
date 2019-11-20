@@ -5,7 +5,6 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { useSelector } from 'react-redux'
 
 const Main = () => {
-    //const isToggledBurger = useSelector((store) => store.isToggleBurger);
     const popularMovies = useSelector((store) => store.popularMovies);
     const popularSerials = useSelector((store) => store.popularSerials);
     const cartoons = useSelector((store) => store.cartoons);
@@ -21,7 +20,7 @@ const Main = () => {
                         </div>
                         Фильмы
                     </NavLink>
-                    <div className={'movies'}>
+                    <div className={'movies movies-mobile-mainpage'}>
                         {Object.values(popularMovies).slice(0, 12).map((movie, key) =>
                             <div key={key} className={'movies-item'}>
                                 <NavLink to={`/films/${movie.id}`}>
@@ -40,7 +39,7 @@ const Main = () => {
                         </div>
                         Сериалы
                     </NavLink>
-                    <div className={'movies'}>
+                    <div className={'movies movies-mobile-mainpage'}>
                         {Object.values(popularSerials).slice(0, 12).map((serial, key) =>
                             <div key={key} className={'movies-item'}>
                                 <NavLink to={`/serials/${serial.id}`}>
@@ -59,7 +58,7 @@ const Main = () => {
                         </div>
                         Мультфильмы
                     </NavLink>
-                    <div className={'movies'}>
+                    <div className={'movies movies-mobile-mainpage'}>
                         {Object.values(cartoons).slice(0, 12).map((cartoons, key) =>
                             <div key={key} className={'movies-item'}>
                                 <NavLink to={`/cartoons/${cartoons.id}`}>
@@ -78,10 +77,10 @@ const Main = () => {
                         </div>
                         Передачи и шоу
                     </NavLink>
-                    <div className={'movies'}>
+                    <div className={'movies movies-mobile-mainpage'}>
                         {Object.values(tvShows).slice(0, 12).map((tvshows, key) =>
                             <div key={key} className={'movies-item'}>
-                                <NavLink to={`/details/${tvshows.id}`}>
+                                <NavLink to={`/tvshows/${tvshows.id}`}>
                                     <img className={'waves-image'} src={`https://image.tmdb.org/t/p/w1280${tvshows.poster_path}`} alt="poster"/>
                                     <h6>{tvshows.title}</h6>
                                 </NavLink>

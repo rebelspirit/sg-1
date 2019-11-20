@@ -1,12 +1,20 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import './index.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {NavLink} from "react-router-dom";
-import {useSelector} from 'react-redux'
+import {NavLink, useHistory} from "react-router-dom";
+import {useDispatch, useSelector} from 'react-redux'
+import {closeBurger} from "../../actions";
+import {getMoviesFromApi, getSerialsFromApi} from "../../actions";
 
 
-const LeftSideBar = (props) => {
+const LeftSideBar = () => {
     const isToggledBurger = useSelector((store) => store.isToggleBurger);
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    useEffect(() => {
+        cleanStyleOfSublinks();
+    }, [isToggledBurger]);
 
     const menu = {
         main: {
@@ -264,41 +272,58 @@ const LeftSideBar = (props) => {
         }
     };
 
+    const cleanStyleOfSublinks = () => {
+            const sublinks = document.querySelectorAll('.sublinks');
+            const arrow = document.querySelectorAll('.nav-icon-right');
+
+            sublinks.forEach((item) => {
+                item.classList.remove('sublinks-item-active');
+            });
+            arrow.forEach((item) => {
+                item.classList.remove('arrow-rotate');
+            });
+    };
+
     const openSublinksMenu = (type) => {
+        cleanStyleOfSublinks();
 
         const sublinks = document.querySelectorAll('.sublinks');
         const arrow = document.querySelectorAll('.nav-icon-right');
 
         sublinks.forEach((item) => {
-            if(item.getAttribute('content-type') !== type) {
-                item.classList.remove('sublinks-item-active');
-            }
-        });
-        sublinks.forEach((item) => {
             if(item.getAttribute('content-type') === type) {
                 item.classList.toggle('sublinks-item-active');
             }
         });
-        arrow.forEach((item) => {
-            if(item.getAttribute('content-type') !== type) {
-                item.classList.remove('arrow-rotate');
-            }
-        });
+
         arrow.forEach((item) => {
             if(item.getAttribute('content-type') === type) {
                 item.classList.toggle('arrow-rotate');
             }
         });
+
+    };
+
+    const pushToCheckedCategory = (page, id, type) => {
+        if (type === "movies"){
+            dispatch(getMoviesFromApi(page, id));
+            history.push('/films');
+        }
+        if (type === "serials"){
+            dispatch(getSerialsFromApi(page, id));
+            history.push('/serials');
+        }
+        dispatch(closeBurger())
     };
 
     return (
-        <aside style={isToggledBurger ? {maxWidth: "240px"} : {maxWidth: "60px"}}>
+        <aside style={isToggledBurger ? {maxWidth: "240px"} : null}>
             {Object.values(menu).map((menu, key) =>
                 <div key={key} className={'navigation'}>
                     {Object.values(menu).map((item, key) =>
                         <ul key={key} className={'item'}>
                             <div className={"button-container"}>
-                                <NavLink to={item.link} className={'itemName'}>
+                                <NavLink to={item.link} className={'itemName'} onClick={() => dispatch(closeBurger())}>
                                     <div className="nav-icon">
                                         <FontAwesomeIcon icon={item.icon} />
                                     </div>
@@ -310,7 +335,7 @@ const LeftSideBar = (props) => {
                                     </div> : null}
                             </div>
                             {Object.values(item.sublinks).map((sub, key) =>
-                                <li className={"sublinks"} key={key} content-type={item.type}>
+                                <li className={"sublinks"} key={key} content-type={item.type} onClick={() => pushToCheckedCategory(1, sub.id, item.type)}>
                                     <div className="sublinks-item" style={isToggledBurger ? {display: "block"} : {display: "none"}}>
                                         <p>{sub.name}</p>
                                     </div>

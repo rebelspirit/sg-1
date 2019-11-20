@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './index.css';
 import Burger from  './Burger';
 import Logo from  './Logo';
@@ -7,9 +7,7 @@ import MoviePosition from './MoviePosition';
 import Notifications from './Notifications';
 import SignIn from './SignIn';
 
-class Header extends Component {
-
-    render() {
+const Header = () => {
         return (
             <header className={'header'}>
                 <div className={'navigation-container'}>
@@ -24,7 +22,6 @@ class Header extends Component {
                 </div>
             </header>
         );
-    };
 };
 
 export default Header;

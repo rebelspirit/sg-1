@@ -121,6 +121,7 @@ header {
     width: 100%;
     max-width: 550px;
     margin: 0 auto;
+    padding: 0 3px;
 }
 .search-container .search-field {
     display: flex;
@@ -182,4 +183,18 @@ header {
 .notification-container:hover,
 .signIn-container:hover {
     background: rgba(176, 176, 176, .2);
+}
+@media screen and (max-width: 450px) {
+    .logo {
+        display: none;
+    }
+    .navigation-container:first-child {
+        max-width: 43px;
+    }
+    .navigation-container:last-child {
+        max-width: 115px;
+    }
+    .movie-container, .notification-container, .signIn-container {
+        padding: 10px 6px;
+    }
 }

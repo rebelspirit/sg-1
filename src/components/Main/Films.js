@@ -132,6 +132,7 @@ class Films extends Component {
             currentCategory: id,
             page: 1,
         }, () => this.props.getMoviesFromApi(1, this.state.currentCategory));
+        this.openCategory();
     };
 
     openCategory = () => {
@@ -142,16 +143,16 @@ class Films extends Component {
         return (
             <main>
                 <div className={'main-container'}>
+                    <h2 className={'movie-type yellow'} onClick={this.openCategory}>
+                        <div className="nav-icon">
+                            <FontAwesomeIcon icon={"film"} />
+                        </div>
+                        Фильмы
+                        <div className={this.state.isOpenCategory ? 'arrow-right arrow-right-rotate' : 'arrow-right'}>
+                            <FontAwesomeIcon icon={"chevron-down"} />
+                        </div>
+                    </h2>
                     <div className={'row'}>
-                        <h2 className={'movie-type yellow'} onClick={this.openCategory}>
-                            <div className="nav-icon">
-                                <FontAwesomeIcon icon={"film"} />
-                            </div>
-                            Фильмы
-                            <div className={this.state.isOpenCategory ? 'arrow-right arrow-right-rotate' : 'arrow-right'}>
-                                <FontAwesomeIcon icon={"chevron-down"} />
-                            </div>
-                        </h2>
                         <div className={this.state.isOpenCategory ? 'category category-open' : 'category'}>
                             {Object.values(this.state.filmsNavigation).map((col, key) =>
                                 <div className={"category-container yellow"} key={key}>
@@ -175,13 +176,13 @@ class Films extends Component {
                         >
                         <div className={'movies'}>
                                 {Object.values(this.props.movies).map((movie, key) =>
-                                    <div key={key} className={'movies-item'}>
+                                    movie.poster_path && movie.title ? <div key={key} className={'movies-item'}>
                                         <NavLink to={`/films/${movie.id}`}>
                                             <img src={`https://image.tmdb.org/t/p/w1280${movie.poster_path}`} alt="poster"/>
                                             <h6>{movie.title}</h6>
                                         </NavLink>
                                         <p>США, {movie.release_date.slice(0, 4)}</p>
-                                    </div>
+                                    </div> : null
                                 )}
                         </div>
                         </InfiniteScroll>

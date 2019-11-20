@@ -1,5 +1,5 @@
 import React from 'react';
-import {setActiveStatus} from "../../actions";
+import {changeActiveStatus} from "../../actions";
 import { useDispatch, useSelector } from 'react-redux'
 
 const Burger = () => {
@@ -8,7 +8,7 @@ const Burger = () => {
 
     return (
         <div className={isToggledBurger ? 'burger open' : 'burger'}
-             onClick={() => dispatch(setActiveStatus())}>
+             onClick={() => dispatch(changeActiveStatus())}>
             <button/>
         </div>
     )

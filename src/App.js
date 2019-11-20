@@ -42,6 +42,7 @@ import { useDispatch } from 'react-redux'
 import { getCartoons, getPopularMovies, getPopularSerials, getTvShows } from './actions'
 import ScrollToTop from './components/ScrollToTop'
 import WindowFreeze from "./components/WindowFreeze";
+import ContentDetails from "./components/Main/ContentDetails";
 
 
 library.add(faSearch, faTh, faBell, faSignInAlt, faHome, faFire, faChevronRight, faFolder, faHistory, faClock, faThumbsUp, faFilm, faBaby, faTv, faList, faPizzaSlice, faCog, faFlag, faQuestionCircle, faCommentAlt, faChevronDown, faThumbsDown, faStar, faPoll);
@@ -70,10 +71,12 @@ const App = () => {
 						<Route exact path="/films" component={Films} />
 						<Route exact path="/serials" component={Serials} />
 						<Route exact path="/test" component={TEST} />
-						{/*<Route path="/cartoons" component={Films}/>*/}
-						{/*<Route path="/tvshows" component={Tvshows}/>*/}
-						<Route path="/films/:id" component={MovieDetails} />
-						<Route path="/serials/:id" component={SerialDetails} />
+						<Route exact path="/cartoons" component={PageNotFound}/>
+						<Route exact path="/tvshows" component={PageNotFound}/>
+						<Route path="/:media_type/:id/" component={ContentDetails} />
+						{/*<Route path="/serials/:id" component={SerialDetails} />*/}
+						{/*<Route path="/cartoons/:id" component={MovieDetails}/>*/}
+						{/*<Route path="/tvshows/:id" component={SerialDetails}/>*/}
 						<Route path="/search/" component={MultiSearch} />
 						<Route path="*" component={PageNotFound} />
 					</Switch>

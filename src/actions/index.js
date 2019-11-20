@@ -1,7 +1,10 @@
 import {MoviesApi} from "../service/moviesAPI";
 
-export const SET_ACTIVE_STATUS = 'SET_ACTIVE_STATUS';
-export const setActiveStatus = () => ({ type: SET_ACTIVE_STATUS });
+export const CHANGE_ACTIVE_STATUS = 'CHANGE_ACTIVE_STATUS';
+export const changeActiveStatus = () => ({ type:  CHANGE_ACTIVE_STATUS });
+
+export const CLOSE_BURGER = 'CLOSE_BURGER';
+export const closeBurger = () => ({ type:  CLOSE_BURGER });
 
 export const IS_LOADING_MOVIES = "IS_LOADING_MOVIES";
 export const GET_MOVIES = 'GET_MOVIES';
@@ -123,6 +126,20 @@ export function getTvShows() {
                 dispatch({
                     type: GET_TVSHOWS,
                     payload: { tvShows }
+                })
+            )
+    }
+}
+
+export const GET_CONTENT_DETAILS = 'GET_CONTENT_DETAILS';
+export function getContentDetails(type, id) {
+    return function (dispatch) {
+        // dispatch({type: IS_LOADING_CONTENT_DETAILS});
+        MoviesApi.getContentDetails(type, id)
+            .then(details =>
+                dispatch({
+                    type: GET_CONTENT_DETAILS,
+                    payload: { details }
                 })
             )
     }

@@ -63,6 +63,7 @@ class MovieDetails extends Component {
     render() {
         return this.state.movie.hasOwnProperty('backdrop_path') ? (
             <main>
+                {console.log(this.props)}
                 {this.state.movie.backdrop_path && <div style={{ backgroundImage: `url(https://image.tmdb.org/t/p/w1280${this.state.movie.backdrop_path})` }} className={"details-background"}/>}
                 <div className={'main-container'}>
                     <h1 className={"details-title yellow"}>{this.state.movie.title}</h1>
@@ -131,12 +132,12 @@ class MovieDetails extends Component {
                             </div>
                         </section>
                         <section className={"details-right-container"}>
-                            <iframe title={"movie"} height={485} width={784} allowFullScreen/>
+                            <iframe title={"movie"} allowFullScreen scrolling={"no"}/>
                             <h6>Немного о фильме:</h6>
                             <p>{this.state.movie.overview}</p>
                             <ShareIcons url={this.props.match.url} title={this.state.movie.title}/>
-                            <ActorsStuff id={this.props.match.params.id} type={this.state.type}/>
                             <RelatedContent id={this.props.match.params.id} type={this.state.type} pushToRelatedContent={this.pushToRelatedContent}/>
+                            <ActorsStuff id={this.props.match.params.id} type={this.state.type}/>
                         </section>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import './index.css';
 import {useDispatch, useSelector} from "react-redux";
-import {setActiveStatus} from "../../actions";
+import {closeBurger} from "../../actions";
 
 const overflow = {
     "true": "hidden",
@@ -14,11 +14,12 @@ const WindowFreeze = () => {
 
     useEffect(() => {
         const body = document.querySelector("body");
-        body.style.overflow = overflow[isToggledBurger];
+        body.style.overflowY = overflow[isToggledBurger];
     }, [isToggledBurger]);
+
     return (
         isToggledBurger ? <div className={"freeze-container"}
-             onClick={() => dispatch(setActiveStatus())}
+             onClick={() => dispatch(closeBurger())}
         /> : null
     )
 };
