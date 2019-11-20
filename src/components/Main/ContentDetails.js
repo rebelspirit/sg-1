@@ -1,21 +1,25 @@
 import React, {useEffect, useState} from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {useDispatch, useSelector} from "react-redux";
-import { getContentDetails } from '../../actions';
-import video404 from "../../assets/img/404_video.png";
-import { ShareIcons } from  "../ShareIcons";
+import {getContentDetails} from '../../actions';
+import {ShareIcons} from "../ShareIcons";
 import ActorsStuff from "../ActorsStuff";
 import RelatedContent from "../RelatedContent";
+
+const initialState = (props) => {
+    if(props.match.params.type === "films") {return "movie"}
+    if(props.match.params.type === "serials") {return "tv"}
+};
 
 const ContentDetails = (props) => {
     const ContentDetails = useSelector((store) => store.ContentDetails);
     const dispatch = useDispatch();
-    const [type] = useState();
+    const [type] = useState(() => initialState(props));
     const [id] = useState(props.match.params.id);
 
     useEffect(() => {
         dispatch(getContentDetails(type, id));
-    }, []);
+    }, [dispatch, id, type]);
 
     return ContentDetails.hasOwnProperty('backdrop_path') ? (
         <main>

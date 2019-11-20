@@ -73,7 +73,7 @@ const App = () => {
 						<Route exact path="/test" component={TEST} />
 						<Route exact path="/cartoons" component={PageNotFound}/>
 						<Route exact path="/tvshows" component={PageNotFound}/>
-						<Route path="/:media_type/:id/" component={ContentDetails} />
+						<Route path="/:type/:id/" component={ContentDetails} />
 						{/*<Route path="/serials/:id" component={SerialDetails} />*/}
 						{/*<Route path="/cartoons/:id" component={MovieDetails}/>*/}
 						{/*<Route path="/tvshows/:id" component={SerialDetails}/>*/}
