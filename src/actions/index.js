@@ -6,6 +6,9 @@ export const changeActiveStatus = () => ({ type:  CHANGE_ACTIVE_STATUS });
 export const CLOSE_BURGER = 'CLOSE_BURGER';
 export const closeBurger = () => ({ type:  CLOSE_BURGER });
 
+export const CLEAR_STORE_CONTENT_DETAILS = 'CLEAR_STORE_CONTENT_DETAILS';
+export const clearStoreContentDetails = () => ({ type:  CLEAR_STORE_CONTENT_DETAILS });
+
 export const IS_LOADING_MOVIES = "IS_LOADING_MOVIES";
 export const GET_MOVIES = 'GET_MOVIES';
 export function getMoviesFromApi(page, category) {

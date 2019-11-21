@@ -1,14 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {useDispatch, useSelector} from "react-redux";
-import {getContentDetails} from '../../actions';
+import {getContentDetails, clearStoreContentDetails} from '../../actions';
 import {ShareIcons} from "../ShareIcons";
 import ActorsStuff from "../ActorsStuff";
 import RelatedContent from "../RelatedContent";
+import video404 from "../../assets/img/404_video.png"
 
 const initialState = (props) => {
-    if(props.match.params.type === "films") {return "movie"}
-    if(props.match.params.type === "serials") {return "tv"}
+    if(props.match.params.type === "films" || props.match.params.type === "cartoons") {return "movie"}
+    if(props.match.params.type === "serials" || props.match.params.type === "multi-serials") {return "tv"}
 };
 
 const ContentDetails = (props) => {
@@ -19,14 +20,18 @@ const ContentDetails = (props) => {
 
     useEffect(() => {
         dispatch(getContentDetails(type, id));
-    }, [dispatch, id, type]);
+
+        return () => dispatch(clearStoreContentDetails());
+    }, [id, type]);
 
     return ContentDetails.hasOwnProperty('backdrop_path') ? (
         <main>
             {ContentDetails.backdrop_path && <div style={{ backgroundImage: `url(https://image.tmdb.org/t/p/w1280${ContentDetails.backdrop_path})` }} className={"details-background"}/>}
             <div className={'main-container'}>
-                <h1 className={"details-title yellow"}>{ContentDetails.title}</h1>
-                <h4 className={"details-original-title"}>{ContentDetails.original_title}</h4>
+                {type === "movie" ? <h1 className={"details-title yellow"}>{ContentDetails.title}</h1> : null}
+                {type === "tv" ? <h1 className={"details-title pink"}>{ContentDetails.name}</h1> : null}
+                {type === "movie" ? <h4 className={"details-original-title"}>{ContentDetails.original_title}</h4> : null}
+                {type === "tv" ? <h4 className={"details-original-title"}>{ContentDetails.original_name}</h4> : null}
                 <div className={"details-container"}>
                     <section className={"details-left-container"}>
                         <img src={`https://image.tmdb.org/t/p/w1280${ContentDetails.poster_path}`} alt="poster"/>
@@ -91,11 +96,11 @@ const ContentDetails = (props) => {
                         </div>
                     </section>
                     <section className={"details-right-container"}>
-                        <iframe title={"movie"} allowFullScreen scrolling={"no"}/>
+                        <iframe title={"movie"} allowFullScreen scrolling={"no"} src={ContentDetails.iframe_src ? ContentDetails.iframe_src : video404}/>
                         <h6>Немного о фильме:</h6>
                         <p>{ContentDetails.overview}</p>
                         <ShareIcons url={props.match.url} title={ContentDetails.title}/>
-                        <RelatedContent id={id} type={type} />
+                        <RelatedContent id={id} type={type}/>
                         <ActorsStuff id={id} type={type}/>
                     </section>
                 </div>

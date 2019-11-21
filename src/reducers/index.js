@@ -12,13 +12,14 @@ import {
     GET_POPULAR_SERIALS,
     GET_CARTOONS,
     GET_TVSHOWS,
-    GET_CONTENT_DETAILS
+    GET_CONTENT_DETAILS,
+    CLEAR_STORE_CONTENT_DETAILS
 } from "../actions";
 
 const initialState = {
     isToggleBurger: false,
     multiSearch: [],
-    ContentDetails: [],
+    ContentDetails: {},
     movies: [],
     serials: [],
     popularMovies: [],
@@ -92,6 +93,10 @@ export default function (state = initialState, action) {
         case GET_CONTENT_DETAILS:
             return {
                 ...state, ContentDetails: payload.details
+            };
+        case CLEAR_STORE_CONTENT_DETAILS:
+            return {
+                ...state, ContentDetails: {}
             };
         default:
             return state

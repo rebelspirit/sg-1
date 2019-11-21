@@ -75,12 +75,12 @@ const Main = () => {
                         <div className="nav-icon">
                             <FontAwesomeIcon icon={"tv"} />
                         </div>
-                        Передачи и шоу
+                        Мультсериалы
                     </NavLink>
                     <div className={'movies movies-mobile-mainpage'}>
                         {Object.values(tvShows).slice(0, 12).map((tvshows, key) =>
                             <div key={key} className={'movies-item'}>
-                                <NavLink to={`/tvshows/${tvshows.id}`}>
+                                <NavLink to={`/multi-serials/${tvshows.id}`}>
                                     <img className={'waves-image'} src={`https://image.tmdb.org/t/p/w1280${tvshows.poster_path}`} alt="poster"/>
                                     <h6>{tvshows.title}</h6>
                                 </NavLink>

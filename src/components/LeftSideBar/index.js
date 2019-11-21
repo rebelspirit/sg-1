@@ -285,7 +285,7 @@ const LeftSideBar = () => {
     };
 
     const openSublinksMenu = (type) => {
-        cleanStyleOfSublinks();
+        // cleanStyleOfSublinks();
 
         const sublinks = document.querySelectorAll('.sublinks');
         const arrow = document.querySelectorAll('.nav-icon-right');

@@ -48,7 +48,7 @@ class MovieDetails extends Component {
                         const iframe = document.querySelector("iframe");
                         iframe.src = video404;
                     console.log(error);
-                })
+                    })
             });
     }
 
