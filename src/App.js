@@ -17,7 +17,6 @@ import {
 	faHistory,
 	faHome,
 	faList,
-	faPizzaSlice,
 	faPoll,
 	faQuestionCircle,
 	faSearch,
@@ -26,15 +25,14 @@ import {
 	faTh,
 	faThumbsDown,
 	faThumbsUp,
-	faTv
+	faTv,
+	faVideo,
 } from '@fortawesome/free-solid-svg-icons'
 import Header from './components/Header'
 import LeftSideBar from './components/LeftSideBar'
 import Main from './components/Main'
 import Films from './components/Main/Films'
 import Serials from './components/Main/Serials'
-import MovieDetails from './components/Main/MovieDetails'
-import SerialDetails from './components/Main/SerialDetails'
 import PageNotFound from './components/PageNotFound'
 import MultiSearch from './components/Main/MultiSearch'
 import TEST from './components/Main/TEST'
@@ -43,9 +41,10 @@ import { getCartoons, getPopularMovies, getPopularSerials, getTvShows } from './
 import ScrollToTop from './components/ScrollToTop'
 import WindowFreeze from "./components/WindowFreeze";
 import ContentDetails from "./components/Main/ContentDetails";
+import DocumentTitle from "react-document-title";
 
 
-library.add(faSearch, faTh, faBell, faSignInAlt, faHome, faFire, faChevronRight, faFolder, faHistory, faClock, faThumbsUp, faFilm, faBaby, faTv, faList, faPizzaSlice, faCog, faFlag, faQuestionCircle, faCommentAlt, faChevronDown, faThumbsDown, faStar, faPoll);
+library.add(faSearch, faTh, faBell, faSignInAlt, faHome, faFire, faChevronRight, faFolder, faHistory, faClock, faThumbsUp, faFilm, faBaby, faTv, faList, faVideo, faCog, faFlag, faQuestionCircle, faCommentAlt, faChevronDown, faThumbsDown, faStar, faPoll);
 
 
 const App = () => {
@@ -59,6 +58,7 @@ const App = () => {
 	}, []);
 
 	return (
+		<DocumentTitle title={"gofilm.io - онлайн кинотеатр"}>
 		<Router>
 			<ScrollToTop />
 			<div className={'app'}>
@@ -73,16 +73,14 @@ const App = () => {
 						<Route exact path="/test" component={TEST} />
 						<Route exact path="/cartoons" component={PageNotFound}/>
 						<Route exact path="/tvshows" component={PageNotFound}/>
-						<Route path="/:type/:id/" component={ContentDetails} />
-						{/*<Route path="/serials/:id" component={SerialDetails} />*/}
-						{/*<Route path="/cartoons/:id" component={MovieDetails}/>*/}
-						{/*<Route path="/tvshows/:id" component={SerialDetails}/>*/}
+						<Route path="/:type/:id/:title" component={ContentDetails}/>
 						<Route path="/search/" component={MultiSearch} />
 						<Route path="*" component={PageNotFound} />
 					</Switch>
 				</div>
 			</div>
 		</Router>
+		</DocumentTitle>
 	)
 };
 

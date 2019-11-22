@@ -133,7 +133,7 @@ const LeftSideBar = () => {
             },
             serials: {
                 name: "Сериалы",
-                icon: "pizza-slice",
+                icon: "tv",
                 link: "/serials",
                 type: "serials",
                 sublinks: {
@@ -206,9 +206,9 @@ const LeftSideBar = () => {
                 sublinks: {},
             },
             tvshows: {
-                name: "Печедачи и шоу",
-                icon: "tv",
-                link: "/tvshows",
+                name: "Мультсериалы",
+                icon: "video",
+                link: "/multi-serials",
                 sublinks: {},
             },
             categories: {

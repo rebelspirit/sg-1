@@ -10,6 +10,8 @@ const Main = () => {
     const cartoons = useSelector((store) => store.cartoons);
     const tvShows = useSelector((store) => store.tvShows);
 
+    const replaceUrlTitle = (title) => title.replace(/ /g, "-");
+
     return (
         <main>
             <div className={'main-container'}>
@@ -23,7 +25,7 @@ const Main = () => {
                     <div className={'movies movies-mobile-mainpage'}>
                         {Object.values(popularMovies).slice(0, 12).map((movie, key) =>
                             <div key={key} className={'movies-item'}>
-                                <NavLink to={`/films/${movie.id}`}>
+                                <NavLink to={`/films/${movie.id}/${replaceUrlTitle(movie.original_title).toLowerCase()}`}>
                                     <img className={'waves-image'} src={`https://image.tmdb.org/t/p/w1280${movie.poster_path}`} alt="poster"/>
                                     <h6>{movie.title}</h6>
                                 </NavLink>
@@ -35,14 +37,14 @@ const Main = () => {
                 <div className={'row'}>
                     <NavLink to={"/serials"} className={'movie-type pink'}>
                         <div className="nav-icon">
-                            <FontAwesomeIcon icon={"pizza-slice"} />
+                            <FontAwesomeIcon icon={"tv"} />
                         </div>
                         Сериалы
                     </NavLink>
                     <div className={'movies movies-mobile-mainpage'}>
                         {Object.values(popularSerials).slice(0, 12).map((serial, key) =>
                             <div key={key} className={'movies-item'}>
-                                <NavLink to={`/serials/${serial.id}`}>
+                                <NavLink to={`/serials/${serial.id}/${replaceUrlTitle(serial.original_name).toLowerCase()}`}>
                                     <img className={'waves-image'} src={`https://image.tmdb.org/t/p/w1280${serial.poster_path}`} alt="poster"/>
                                     <h6>{serial.name}</h6>
                                 </NavLink>
@@ -61,7 +63,7 @@ const Main = () => {
                     <div className={'movies movies-mobile-mainpage'}>
                         {Object.values(cartoons).slice(0, 12).map((cartoons, key) =>
                             <div key={key} className={'movies-item'}>
-                                <NavLink to={`/cartoons/${cartoons.id}`}>
+                                <NavLink to={`/cartoons/${cartoons.id}/${replaceUrlTitle(cartoons.original_title).toLowerCase()}`}>
                                     <img className={'waves-image'} src={`https://image.tmdb.org/t/p/w1280${cartoons.poster_path}`} alt="poster"/>
                                     <h6>{cartoons.title}</h6>
                                 </NavLink>
@@ -71,20 +73,20 @@ const Main = () => {
                     </div>
                 </div>
                 <div className={'row'}>
-                    <NavLink to={"/tvshows"} className={'movie-type blue'}>
+                    <NavLink to={"/multi-serials"} className={'movie-type blue'}>
                         <div className="nav-icon">
-                            <FontAwesomeIcon icon={"tv"} />
+                            <FontAwesomeIcon icon={"video"} />
                         </div>
                         Мультсериалы
                     </NavLink>
                     <div className={'movies movies-mobile-mainpage'}>
-                        {Object.values(tvShows).slice(0, 12).map((tvshows, key) =>
+                        {Object.values(tvShows).slice(0, 12).map((multiSerials, key) =>
                             <div key={key} className={'movies-item'}>
-                                <NavLink to={`/multi-serials/${tvshows.id}`}>
-                                    <img className={'waves-image'} src={`https://image.tmdb.org/t/p/w1280${tvshows.poster_path}`} alt="poster"/>
-                                    <h6>{tvshows.title}</h6>
+                                <NavLink to={`/multi-serials/${multiSerials.id}/${replaceUrlTitle(multiSerials.original_name).toLowerCase()}`}>
+                                    <img className={'waves-image'} src={`https://image.tmdb.org/t/p/w1280${multiSerials.poster_path}`} alt="poster"/>
+                                    <h6>{multiSerials.name}</h6>
                                 </NavLink>
-                                <p>США, {tvshows.first_air_date.slice(0, 4)}</p>
+                                <p>США, {multiSerials.first_air_date.slice(0, 4)}</p>
                             </div>
                         )}
                     </div>

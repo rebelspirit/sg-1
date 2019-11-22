@@ -115,7 +115,7 @@ class Serials extends Component {
                 <div className={'main-container'}>
                     <h2 className={'movie-type pink'} onClick={this.openCategory}>
                         <div className="nav-icon">
-                            <FontAwesomeIcon icon={"pizza-slice"} />
+                            <FontAwesomeIcon icon={"tv"} />
                         </div>
                         Сериалы
                         <div className={this.state.isOpenCategory ? 'arrow-right arrow-right-rotate' : 'arrow-right'}>
@@ -147,7 +147,7 @@ class Serials extends Component {
                         <div className={'movies'}>
                             {Object.values(this.props.serials).map((serial, key) =>
                                 serial.poster_path && serial.name ? <div key={key} className={'movies-item'}>
-                                    <NavLink to={`/serials/${serial.id}`}>
+                                    <NavLink to={`/serials/${serial.id}/${replaceUrlTitle(serial.original_name).toLowerCase()}`}>
                                         <img src={`https://image.tmdb.org/t/p/w1280${serial.poster_path}`} alt="poster"/>
                                         <h6>{serial.name}</h6>
                                     </NavLink>
@@ -161,6 +161,7 @@ class Serials extends Component {
             </main>
         )};
 }
+const replaceUrlTitle = (title) => title.replace(/ /g, "-");
 
 const mapStateToProps = (state, props) => ({
     isToggleBurger: state.isToggleBurger,
