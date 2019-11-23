@@ -21,7 +21,7 @@ const RelatedContent = (props) => {
             <div className={"related-content"}>
                 {Object.values(relatedContent).map((content, key) =>
                     content.poster_path ? <div className={"related-content-item"} key={key} onClick={() => props.pushToRelatedContent(content.id)}>
-                        <img src={`https://image.tmdb.org/t/p/w1280${content.poster_path}`} alt="poster"/>
+                        <img src={`https://image.tmdb.org/t/p/w342${content.poster_path}`} alt="poster"/>
                         <p>{props.type === "movie" ? content.title : content.name}</p>
                     </div> : null
                 )}

@@ -19,7 +19,7 @@ const ActorsStuff = (props) => {
             <div className={"actors-stuff"}>
                 {Object.values(actors).map((actor, key) =>
                     actor.profile_path ? <div className={"actor-stuff-item"} key={key}>
-                        <img src={`https://image.tmdb.org/t/p/w1280${actor.profile_path}`} alt="actor"/>
+                        <img src={`https://image.tmdb.org/t/p/w185${actor.profile_path}`} alt="actor"/>
                         <p>{actor.name}</p>
                     </div> : null
                 )}

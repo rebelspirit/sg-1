@@ -26,7 +26,7 @@ const Main = () => {
                         {Object.values(popularMovies).slice(0, 12).map((movie, key) =>
                             <div key={key} className={'movies-item'}>
                                 <NavLink to={`/films/${movie.id}/${replaceUrlTitle(movie.original_title).toLowerCase()}`}>
-                                    <img className={'waves-image'} src={`https://image.tmdb.org/t/p/w1280${movie.poster_path}`} alt="poster"/>
+                                    <img className={'waves-image'} src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`} alt="poster"/>
                                     <h6>{movie.title}</h6>
                                 </NavLink>
                                 <p>США, {movie.release_date.slice(0, 4)}</p>
@@ -45,7 +45,7 @@ const Main = () => {
                         {Object.values(popularSerials).slice(0, 12).map((serial, key) =>
                             <div key={key} className={'movies-item'}>
                                 <NavLink to={`/serials/${serial.id}/${replaceUrlTitle(serial.original_name).toLowerCase()}`}>
-                                    <img className={'waves-image'} src={`https://image.tmdb.org/t/p/w1280${serial.poster_path}`} alt="poster"/>
+                                    <img className={'waves-image'} src={`https://image.tmdb.org/t/p/w342${serial.poster_path}`} alt="poster"/>
                                     <h6>{serial.name}</h6>
                                 </NavLink>
                                 <p>{serial.origin_country}, {serial.first_air_date.slice(0, 4)}</p>
@@ -64,7 +64,7 @@ const Main = () => {
                         {Object.values(cartoons).slice(0, 12).map((cartoons, key) =>
                             <div key={key} className={'movies-item'}>
                                 <NavLink to={`/cartoons/${cartoons.id}/${replaceUrlTitle(cartoons.original_title).toLowerCase()}`}>
-                                    <img className={'waves-image'} src={`https://image.tmdb.org/t/p/w1280${cartoons.poster_path}`} alt="poster"/>
+                                    <img className={'waves-image'} src={`https://image.tmdb.org/t/p/w342${cartoons.poster_path}`} alt="poster"/>
                                     <h6>{cartoons.title}</h6>
                                 </NavLink>
                                 <p>США, {cartoons.release_date.slice(0, 4)}</p>
@@ -83,7 +83,7 @@ const Main = () => {
                         {Object.values(tvShows).slice(0, 12).map((multiSerials, key) =>
                             <div key={key} className={'movies-item'}>
                                 <NavLink to={`/multi-serials/${multiSerials.id}/${replaceUrlTitle(multiSerials.original_name).toLowerCase()}`}>
-                                    <img className={'waves-image'} src={`https://image.tmdb.org/t/p/w1280${multiSerials.poster_path}`} alt="poster"/>
+                                    <img className={'waves-image'} src={`https://image.tmdb.org/t/p/w342${multiSerials.poster_path}`} alt="poster"/>
                                     <h6>{multiSerials.name}</h6>
                                 </NavLink>
                                 <p>США, {multiSerials.first_air_date.slice(0, 4)}</p>

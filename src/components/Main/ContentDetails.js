@@ -58,7 +58,7 @@ const ContentDetails = (props) => {
                 <ContentOriginalTitle type={type} original_title={ContentDetails.original_title} original_name={ContentDetails.original_name}/>
                 <div className={"details-container"}>
                     <section className={"details-left-container"}>
-                        <img src={`https://image.tmdb.org/t/p/w1280${ContentDetails.poster_path}`} alt="poster"/>
+                        <img src={`https://image.tmdb.org/t/p/w780${ContentDetails.poster_path}`} alt="poster"/>
                         <div className={"details-like-container"}>
                             <div className={"like"}>
                                 <FontAwesomeIcon icon={"thumbs-up"} />

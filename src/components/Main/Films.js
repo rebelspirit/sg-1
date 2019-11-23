@@ -179,7 +179,7 @@ class Films extends Component {
                                 {Object.values(this.props.movies).map((movie, key) =>
                                     movie.poster_path && movie.title ? <div key={key} className={'movies-item'}>
                                         <NavLink to={`/films/${movie.id}/${replaceUrlTitle(movie.original_title).toLowerCase()}`}>
-                                            <img src={`https://image.tmdb.org/t/p/w1280${movie.poster_path}`} alt="poster"/>
+                                            <img src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`} alt="poster"/>
                                             <h6>{movie.title}</h6>
                                         </NavLink>
                                         <p>США, {movie.release_date.slice(0, 4)}</p>

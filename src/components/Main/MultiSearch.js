@@ -6,6 +6,7 @@ import {NavLink} from "react-router-dom";
 
 const MultiSearch = () => {
     const multiSearch = useSelector((store) => store.multiSearch);
+    const replaceUrlTitle = (title) => title.replace(/ /g, "-");
 
     return (
         <main>
@@ -21,8 +22,8 @@ const MultiSearch = () => {
                         {Object.values(multiSearch).map((content, key) =>
                             <div key={key} className={'movies-item'}>
                                 {console.log(content)}
-                                <NavLink to={content.media_type === "movie" ? `/films/${content.id}` : `/serials/${content.id}`}>
-                                    {content.media_type !== "person" ? <img src={`https://image.tmdb.org/t/p/w1280${content.poster_path}`} alt="poster"/> : <img src={`https://image.tmdb.org/t/p/w1280${content.profile_path}`} alt="poster"/>}
+                                <NavLink to={content.media_type === "movie" ? `/films/${content.id}/${replaceUrlTitle(content.original_title).toLowerCase()}` : `/serials/${content.id}/${replaceUrlTitle(content.original_name).toLowerCase()}`}>
+                                    {content.media_type !== "person" ? <img src={`https://image.tmdb.org/t/p/w342${content.poster_path}`} alt="poster"/> : <img src={`https://image.tmdb.org/t/p/w342${content.profile_path}`} alt="poster"/>}
                                     <h6>{content.title ? content.title : content.name}</h6>
                                 </NavLink>
                                 {content.media_type === "movie" && content.release_date ? <p>США, {content.release_date.slice(0, 4)}</p> : null}
