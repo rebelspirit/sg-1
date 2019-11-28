@@ -10,11 +10,14 @@ import {NavLink} from "react-router-dom";
 const TEST = () => {
     const movies = useSelector((store) => store.movies);
     const dispatch = useDispatch();
-    const [page, setPage] = useState(0);
+    const [page, setPage] = useState(1);
 
     useEffect(() => {
         dispatch(getMoviesFromApi(page));
-        console.log(page)
+    }, []);
+
+    useEffect(() => {
+        if(page > 1){dispatch(loadMoreMovies(page))}
     }, [page]);
 
     return (
@@ -29,7 +32,11 @@ const TEST = () => {
                     </h2>
                     <InfiniteScroll
                         pageStart={page}
-                        loadMore={() => setPage(1)}
+                        loadMore={() => {
+                            if(movies.length >= 20) {
+                                return setPage(page + 1)
+                            }
+                        }}
                         hasMore={true}
                         loader={<Loader key={0}/>}
                         useWindow={true}

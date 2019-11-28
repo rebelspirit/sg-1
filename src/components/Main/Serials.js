@@ -13,7 +13,7 @@ class Serials extends Component {
         super(props);
 
         this.state = {
-            page: 1,
+            page: null,
             isOpenCategory: false,
             currentCategory: "",
             openWidth: {
@@ -136,7 +136,7 @@ class Serials extends Component {
                             pageStart={this.state.page}
                             loadMore={() => {
                                 this.setState((prevState) => {
-                                    page: prevState.page++
+                                    prevState.page++
                                 }, () => this.props.loadMoreSerials(this.state.page, this.state.currentCategory))
                             }}
                             hasMore={true}
@@ -147,7 +147,7 @@ class Serials extends Component {
                         <div className={'movies'}>
                             {Object.values(this.props.serials).map((serial, key) =>
                                 serial.poster_path && serial.name ? <div key={key} className={'movies-item'}>
-                                    <NavLink to={`/serials/${serial.id}/${replaceUrlTitle(serial.original_name).toLowerCase()}`}>
+                                    <NavLink to={`/serials/${replaceUrlTitle(serial.original_name)}/${serial.id}`}>
                                         <img src={`https://image.tmdb.org/t/p/w342${serial.poster_path}`} alt="poster"/>
                                         <h6>{serial.name}</h6>
                                     </NavLink>
@@ -161,7 +161,7 @@ class Serials extends Component {
             </main>
         )};
 }
-const replaceUrlTitle = (title) => title.replace(/ /g, "-");
+const replaceUrlTitle = (title) => title ? title.replace(/ /g, "-").toLowerCase() : null;
 
 const mapStateToProps = (state, props) => ({
     isToggleBurger: state.isToggleBurger,

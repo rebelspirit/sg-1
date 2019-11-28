@@ -1,32 +1,38 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import './index.css';
-import axios from "axios";
+import {useDispatch, useSelector} from "react-redux";
+import {getRelaitedContent} from "../../actions";
+import {NavLink} from "react-router-dom";
 
 const RelatedContent = (props) => {
-    const [relatedContent, setRelatedContent] = useState({});
+    const relatedContent = useSelector((store) => store.relatedContent);
+    const dispatch = useDispatch();
+
 
     useEffect(() => {
-        const api = '37381515063aba22627eb415da0adfe3';
-        axios.get(`https://api.themoviedb.org/3/${props.type}/${props.id}/recommendations?api_key=${api}&language=ru-UA`)
-            .then(response => {
-                const results = response.data.results;
-                setRelatedContent(results.slice(0, 6));
-                console.log(results)
-            })
+        dispatch(getRelaitedContent(props.type, props.id));
     }, [props.id, props.type]);
 
+    const replaceUrlTitle = (title) => title ? title.replace(/ /g, "-").toLowerCase() : null;
+
     return (
-        <div className={"related-content-container"}>
-            {relatedContent.length ? <h6>Похожий материал:</h6> : null}
+        relatedContent.length ? <div className={"related-content-container"}>
+            <h6>Похожий материал:</h6>
             <div className={"related-content"}>
                 {Object.values(relatedContent).map((content, key) =>
-                    content.poster_path ? <div className={"related-content-item"} key={key} onClick={() => props.pushToRelatedContent(content.id)}>
-                        <img src={`https://image.tmdb.org/t/p/w342${content.poster_path}`} alt="poster"/>
-                        <p>{props.type === "movie" ? content.title : content.name}</p>
+                    content.poster_path ? <div className={"related-content-item"} key={key}>
+                        {props.type === "movie" ? <NavLink to={`/${props.urlType}/${replaceUrlTitle(content.original_title)}/${content.id}`}>
+                            <img src={`https://image.tmdb.org/t/p/w342${content.poster_path}`} alt="poster"/>
+                            <p>{content.title}</p>
+                        </NavLink> : null}
+                        {props.type === "tv" ? <NavLink to={`/${props.urlType}/${replaceUrlTitle(content.original_name)}/${content.id}`}>
+                            <img src={`https://image.tmdb.org/t/p/w342${content.poster_path}`} alt="poster"/>
+                            <p>{content.name}</p>
+                        </NavLink> : null}
                     </div> : null
                 )}
             </div>
-        </div>
+        </div> : null
     )
 };
 export default RelatedContent;

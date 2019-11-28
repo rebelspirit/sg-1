@@ -13,7 +13,11 @@ import {
     GET_CARTOONS,
     GET_TVSHOWS,
     GET_CONTENT_DETAILS,
-    CLEAR_STORE_CONTENT_DETAILS
+    CLEAR_STORE_CONTENT_DETAILS,
+    GET_RELATED_CONTENT,
+    GET_ACTORS_STUFF,
+    GET_TRENDS_MOVIES,
+    GET_TRENDS_SERIALS
 } from "../actions";
 
 const initialState = {
@@ -26,6 +30,10 @@ const initialState = {
     popularSerials: [],
     cartoons: [],
     tvShows: [],
+    relatedContent: [],
+    actorsStuff: [],
+    trendsMovies: [],
+    trendsSerials: [],
     isLoadingMovies: false,
     isLoadingSerials: false
 };
@@ -97,6 +105,22 @@ export default function (state = initialState, action) {
         case CLEAR_STORE_CONTENT_DETAILS:
             return {
                 ...state, ContentDetails: {}
+            };
+        case GET_RELATED_CONTENT:
+            return {
+                ...state, relatedContent: payload.relatedContent
+            };
+        case GET_ACTORS_STUFF:
+            return {
+                ...state, actorsStuff: payload.actorsStuff
+            };
+        case GET_TRENDS_MOVIES:
+            return {
+                ...state, trendsMovies: payload.trendsMovies
+            };
+        case GET_TRENDS_SERIALS:
+            return {
+                ...state, trendsSerials: payload.trendsSerials
             };
         default:
             return state

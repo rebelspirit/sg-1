@@ -10,12 +10,12 @@ const Main = () => {
     const cartoons = useSelector((store) => store.cartoons);
     const tvShows = useSelector((store) => store.tvShows);
 
-    const replaceUrlTitle = (title) => title.replace(/ /g, "-");
+    const replaceUrlTitle = (title) => title ? title.replace(/ /g, "-").toLowerCase() : null;
 
     return (
         <main>
             <div className={'main-container'}>
-                <div className={'row'}>
+                {popularMovies.length ? <div className={'row'}>
                     <NavLink to={"/films"} className={'movie-type yellow'}>
                         <div className="nav-icon">
                             <FontAwesomeIcon icon={"film"} />
@@ -25,7 +25,7 @@ const Main = () => {
                     <div className={'movies movies-mobile-mainpage'}>
                         {Object.values(popularMovies).slice(0, 12).map((movie, key) =>
                             <div key={key} className={'movies-item'}>
-                                <NavLink to={`/films/${movie.id}/${replaceUrlTitle(movie.original_title).toLowerCase()}`}>
+                                <NavLink to={`/films/${replaceUrlTitle(movie.original_title)}/${movie.id}`}>
                                     <img className={'waves-image'} src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`} alt="poster"/>
                                     <h6>{movie.title}</h6>
                                 </NavLink>
@@ -33,8 +33,8 @@ const Main = () => {
                             </div>
                         )}
                     </div>
-                </div>
-                <div className={'row'}>
+                </div> : null}
+                {popularSerials.length ? <div className={'row'}>
                     <NavLink to={"/serials"} className={'movie-type pink'}>
                         <div className="nav-icon">
                             <FontAwesomeIcon icon={"tv"} />
@@ -44,7 +44,7 @@ const Main = () => {
                     <div className={'movies movies-mobile-mainpage'}>
                         {Object.values(popularSerials).slice(0, 12).map((serial, key) =>
                             <div key={key} className={'movies-item'}>
-                                <NavLink to={`/serials/${serial.id}/${replaceUrlTitle(serial.original_name).toLowerCase()}`}>
+                                <NavLink to={`/serials/${replaceUrlTitle(serial.original_name)}/${serial.id}`}>
                                     <img className={'waves-image'} src={`https://image.tmdb.org/t/p/w342${serial.poster_path}`} alt="poster"/>
                                     <h6>{serial.name}</h6>
                                 </NavLink>
@@ -52,9 +52,9 @@ const Main = () => {
                             </div>
                         )}
                     </div>
-                </div>
-                <div className={'row'}>
-                    <NavLink to={"/cartoons"} className={'movie-type green'}>
+                </div> : null}
+                {cartoons.length ? <div className={'row'}>
+                    <NavLink to={"/films/cartoons"} className={'movie-type green'}>
                         <div className="nav-icon">
                             <FontAwesomeIcon icon={"baby"} />
                         </div>
@@ -63,7 +63,7 @@ const Main = () => {
                     <div className={'movies movies-mobile-mainpage'}>
                         {Object.values(cartoons).slice(0, 12).map((cartoons, key) =>
                             <div key={key} className={'movies-item'}>
-                                <NavLink to={`/cartoons/${cartoons.id}/${replaceUrlTitle(cartoons.original_title).toLowerCase()}`}>
+                                <NavLink to={`/cartoons/${replaceUrlTitle(cartoons.original_title)}/${cartoons.id}`}>
                                     <img className={'waves-image'} src={`https://image.tmdb.org/t/p/w342${cartoons.poster_path}`} alt="poster"/>
                                     <h6>{cartoons.title}</h6>
                                 </NavLink>
@@ -71,9 +71,9 @@ const Main = () => {
                             </div>
                         )}
                     </div>
-                </div>
-                <div className={'row'}>
-                    <NavLink to={"/multi-serials"} className={'movie-type blue'}>
+                </div> : null}
+                {tvShows.length ? <div className={'row'}>
+                    <NavLink to={"/serials/cartoons"} className={'movie-type blue'}>
                         <div className="nav-icon">
                             <FontAwesomeIcon icon={"video"} />
                         </div>
@@ -82,7 +82,7 @@ const Main = () => {
                     <div className={'movies movies-mobile-mainpage'}>
                         {Object.values(tvShows).slice(0, 12).map((multiSerials, key) =>
                             <div key={key} className={'movies-item'}>
-                                <NavLink to={`/multi-serials/${multiSerials.id}/${replaceUrlTitle(multiSerials.original_name).toLowerCase()}`}>
+                                <NavLink to={`/multi-serials/${replaceUrlTitle(multiSerials.original_name)}/${multiSerials.id}`}>
                                     <img className={'waves-image'} src={`https://image.tmdb.org/t/p/w342${multiSerials.poster_path}`} alt="poster"/>
                                     <h6>{multiSerials.name}</h6>
                                 </NavLink>
@@ -90,7 +90,7 @@ const Main = () => {
                             </div>
                         )}
                     </div>
-                </div>
+                </div> : null}
             </div>
         </main>
     )

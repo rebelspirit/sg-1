@@ -54,4 +54,20 @@ export class MoviesApi {
             })
             .catch(error => console.log(error))
     }
+    static getRelaitedContent(type, id) {
+        return axios.get(`https://api.themoviedb.org/3/${type}/${id}/recommendations?api_key=${api}&${language}&${region}`)
+            .then(response => response.data.results.slice(0, 6))
+    }
+    static getActorsStuff(type, id) {
+        return axios.get(`https://api.themoviedb.org/3/${type}/${id}/credits?api_key=${api}&${language}&${region}`)
+            .then(response => response.data.cast.slice(0, 9))
+    }
+    static getTrendsSerials() {
+        return axios.get(`https://api.themoviedb.org/3/trending/tv/week?api_key=${api}&${language}&${region}`)
+            .then(response => response.data.results.slice(0, 6))
+    }
+    static getTrendsMovies() {
+        return axios.get(`https://api.themoviedb.org/3/trending/movie/week?api_key=${api}&${language}&${region}`)
+            .then(response => response.data.results.slice(0, 6))
+    }
 }

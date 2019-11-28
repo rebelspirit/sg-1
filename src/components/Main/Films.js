@@ -13,7 +13,7 @@ class Films extends Component {
         super(props);
 
         this.state = {
-            page: 1,
+            page: null,
             isOpenCategory: false,
             currentCategory: "",
             openWidth: {
@@ -167,7 +167,7 @@ class Films extends Component {
                             pageStart={this.state.page}
                             loadMore={() => {
                                 this.setState((prevState) => {
-                                    page: prevState.page++
+                                    prevState.page++
                                 }, () => this.props.loadMoreMovies(this.state.page, this.state.currentCategory))
                             }}
                             hasMore={true}
@@ -178,7 +178,7 @@ class Films extends Component {
                         <div className={'movies'}>
                                 {Object.values(this.props.movies).map((movie, key) =>
                                     movie.poster_path && movie.title ? <div key={key} className={'movies-item'}>
-                                        <NavLink to={`/films/${movie.id}/${replaceUrlTitle(movie.original_title).toLowerCase()}`}>
+                                        <NavLink to={`/films/${replaceUrlTitle(movie.original_title)}/${movie.id}`}>
                                             <img src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`} alt="poster"/>
                                             <h6>{movie.title}</h6>
                                         </NavLink>
@@ -193,7 +193,7 @@ class Films extends Component {
         )};
 }
 
-const replaceUrlTitle = (title) => title.replace(/ /g, "-");
+const replaceUrlTitle = (title) => title ? title.replace(/ /g, "-").toLowerCase() : null;
 
 const mapStateToProps = (state, props) => ({
     isToggleBurger: state.isToggleBurger,

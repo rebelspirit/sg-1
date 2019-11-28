@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {useDispatch, useSelector} from "react-redux";
 import {getContentDetails, clearStoreContentDetails} from '../../actions';
@@ -32,11 +32,12 @@ const initialState = (props) => {
 const ContentDetails = (props) => {
     const ContentDetails = useSelector((store) => store.ContentDetails);
     const dispatch = useDispatch();
-    const [type] = useState(() => initialState(props));
-    const [id] = useState(props.match.params.id);
+    const type = initialState(props);
+    const id = props.match.params.id;
 
     useEffect(() => {
         dispatch(getContentDetails(type, id));
+
         return () => {
             dispatch(clearStoreContentDetails());
         };
@@ -72,8 +73,8 @@ const ContentDetails = (props) => {
                         <ContentRaiting popularity={ContentDetails.popularity} vote_average={ContentDetails.vote_average}/>
                         <div className={"details-description-container"}>
                             <ContentYear type={type} release_date={ContentDetails.release_date} first_air_date={ContentDetails.first_air_date}/>
-                            <ContentCountry/>
-                            <ContentGenre/>
+                            <ContentCountry production_countries={ContentDetails.production_countries} origin_country={ContentDetails.origin_country}/>
+                            <ContentGenre genres={ContentDetails.genres}/>
                             <ContentLang original_language={ContentDetails.original_language}/>
                             <ContentQuality/>
                             <ContentDuration runtime={ContentDetails.runtime}/>
@@ -88,7 +89,7 @@ const ContentDetails = (props) => {
                         <iframe title={"movie"} allowFullScreen scrolling={"no"} src={ContentDetails.iframe_src ? ContentDetails.iframe_src : video404}/>
                         <ContentOverview overview={ContentDetails.overview}/>
                         <ShareIcons url={props.match.url} title={ContentDetails.title}/>
-                        <RelatedContent id={id} type={type}/>
+                        <RelatedContent id={id} type={type} urlType={props.match.params.type}/>
                         <ActorsStuff id={id} type={type}/>
                     </section>
                 </div>

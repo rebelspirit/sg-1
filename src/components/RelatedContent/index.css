@@ -12,7 +12,7 @@
     padding: 3px;
     cursor: pointer;
 }
-.related-content-item {
+.related-content-item a {
     text-decoration: none;
 }
 .related-content-item img {

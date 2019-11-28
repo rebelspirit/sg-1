@@ -81,7 +81,6 @@ export function findDataByMultiSearch(query) {
 export const GET_POPULAR_MOVIES = 'GET_POPULAR_MOVIES';
 export function getPopularMovies() {
     return function (dispatch) {
-        // dispatch({type: IS_LOADING_SERIALS});
         MoviesApi.getPopularMovies()
             .then(popularMovies =>
                 dispatch({
@@ -95,7 +94,6 @@ export function getPopularMovies() {
 export const GET_POPULAR_SERIALS = 'GET_POPULAR_SERIALS';
 export function getPopularSerials() {
     return function (dispatch) {
-        // dispatch({type: IS_LOADING_SERIALS});
         MoviesApi.getPopularSerials()
             .then(popularSerials =>
                 dispatch({
@@ -109,7 +107,6 @@ export function getPopularSerials() {
 export const GET_CARTOONS = 'GET_CARTOONS';
 export function getCartoons() {
     return function (dispatch) {
-        // dispatch({type: IS_LOADING_SERIALS});
         MoviesApi.getCartoons()
             .then(cartoons =>
                 dispatch({
@@ -123,7 +120,6 @@ export function getCartoons() {
 export const GET_TVSHOWS = 'GET_TVSHOWS';
 export function getTvShows() {
     return function (dispatch) {
-        // dispatch({type: IS_LOADING_SERIALS});
         MoviesApi.getTvShows()
             .then(tvShows =>
                 dispatch({
@@ -137,12 +133,63 @@ export function getTvShows() {
 export const GET_CONTENT_DETAILS = 'GET_CONTENT_DETAILS';
 export function getContentDetails(type, id) {
     return function (dispatch) {
-        // dispatch({type: IS_LOADING_CONTENT_DETAILS});
         MoviesApi.getContentDetails(type, id)
             .then(details =>
                 dispatch({
                     type: GET_CONTENT_DETAILS,
                     payload: { details }
+                })
+            )
+    }
+}
+
+export const GET_RELATED_CONTENT = 'GET_RELATED_CONTENT';
+export function getRelaitedContent(type, id) {
+    return function (dispatch) {
+        MoviesApi.getRelaitedContent(type, id)
+            .then(relatedContent =>
+                dispatch({
+                    type: GET_RELATED_CONTENT,
+                    payload: { relatedContent }
+                })
+            )
+    }
+}
+
+export const GET_ACTORS_STUFF = 'GET_ACTORS_STUFF';
+export function getActorsStuff(type, id) {
+    return function (dispatch) {
+        MoviesApi.getActorsStuff(type, id)
+            .then(actorsStuff =>
+                dispatch({
+                    type: GET_ACTORS_STUFF,
+                    payload: { actorsStuff }
+                })
+            )
+    }
+}
+
+export const GET_TRENDS_MOVIES = 'GET_TRENDS_MOVIES';
+export function getTrendsMovies(type, id) {
+    return function (dispatch) {
+        MoviesApi.getTrendsMovies(type, id)
+            .then(trendsMovies =>
+                dispatch({
+                    type: GET_TRENDS_MOVIES,
+                    payload: { trendsMovies }
+                })
+            )
+    }
+}
+
+export const GET_TRENDS_SERIALS = 'GET_TRENDS_SERIALS';
+export function getTrendsSerials(type, id) {
+    return function (dispatch) {
+        MoviesApi.getTrendsSerials(type, id)
+            .then(trendsSerials =>
+                dispatch({
+                    type: GET_TRENDS_SERIALS,
+                    payload: { trendsSerials }
                 })
             )
     }

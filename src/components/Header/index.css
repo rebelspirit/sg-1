@@ -195,6 +195,10 @@ header {
         max-width: 115px;
     }
     .movie-container, .notification-container, .signIn-container {
-        padding: 10px 6px;
+        padding: 9px 10px;
+        font-size: 1.1rem;
+    }
+    .notification-container {
+        padding: 9px 11px;
     }
 }

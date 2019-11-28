@@ -139,7 +139,7 @@ const LeftSideBar = () => {
                 sublinks: {
                     adventure: {
                         name: "Приключения",
-                        id: "10759"
+                        id: "10759",
                     },
                     cartoons: {
                         name: "Мультфильм",
@@ -211,10 +211,10 @@ const LeftSideBar = () => {
                 link: "/multi-serials",
                 sublinks: {},
             },
-            categories: {
-                name: "Категории",
+            collections: {
+                name: "Коллекции",
                 icon: "list",
-                link: "/categories",
+                link: "/collections",
                 sublinks: {},
             },
         },
@@ -304,10 +304,11 @@ const LeftSideBar = () => {
 
     };
 
-    const pushToCheckedCategory = (page, id, type) => {
+    const pushToCheckedCategory = (page, id, type, sublink) => {
         if (type === "movies"){
             dispatch(getMoviesFromApi(page, id));
-            history.push('/films');
+            //history.push(`/films`);
+            history.push(`/films${sublink}`);
         }
         if (type === "serials"){
             dispatch(getSerialsFromApi(page, id));
@@ -335,7 +336,7 @@ const LeftSideBar = () => {
                                     </div> : null}
                             </div>
                             {Object.values(item.sublinks).map((sub, key) =>
-                                <li className={"sublinks"} key={key} content-type={item.type} onClick={() => pushToCheckedCategory(1, sub.id, item.type)}>
+                                <li className={"sublinks"} key={key} content-type={item.type} onClick={() => pushToCheckedCategory(1, sub.id, item.type, sub.link)}>
                                     <div className="sublinks-item" style={isToggledBurger ? {display: "block"} : {display: "none"}}>
                                         <p>{sub.name}</p>
                                     </div>

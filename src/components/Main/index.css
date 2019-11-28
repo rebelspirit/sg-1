@@ -249,11 +249,26 @@ main {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-bottom: 3px;
+    margin-bottom: 5px;
 }
 .details-description-item .item-name {
     width: 30%;
     margin-right: 10px;
+}
+.details-description-item .item-text {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 180px;
+    justify-content: flex-start;
+}
+.details-description-item .item-text span {
+    padding: 0 3px;
+    transition: .3s;
+}
+.details-description-item .item-text .touchable:hover {
+    color: #ffffff;
+    cursor: pointer;
 }
 .details-right-container {
     display: flex;
